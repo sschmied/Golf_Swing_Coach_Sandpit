@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f2e1a">
+<title>Golf Coach | Schmied Research And Development</title>
+<link rel="manifest" id="mf" href="manifest.json">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%231a7a3a'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-size='54' fill='white'%3E%E2%9B%B3%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#f4f6f3;--panel:#fff;--panel2:#eef2ee;--ink:#121a14;--muted:#5c6b5e;--line:#d9e2d9;--accent:#1a7a3a;--accent-ink:#fff;--steel:#2f6e4a;--ring:#c5d8c5;--shadow:0 1px 2px rgba(16,32,16,.06),0 10px 28px rgba(16,32,16,.07);--sea:var(--steel);--hot:var(--accent);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1410;--panel:#141d16;--panel2:#1a2620;--ink:#eef4ee;--muted:#9ab0a0;--line:#27382b;--accent:#3cb371;--accent-ink:#0a1a0f;--steel:#7fcf9f;--ring:#3a4d3e;--shadow:0 1px 2px rgba(0,0,0,.4),0 12px 32px rgba(0,0,0,.35);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d1410;--panel:#141d16;--panel2:#1a2620;--ink:#eef4ee;--muted:#9ab0a0;--line:#27382b;--accent:#3cb371;--accent-ink:#0a1a0f;--steel:#7fcf9f;--ring:#3a4d3e;--shadow:0 1px 2px rgba(0,0,0,.4),0 12px 32px rgba(0,0,0,.35);color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",Impact,sans-serif;font-weight:800;margin:0}
+button,select,input{font-family:inherit}
+.top{background:var(--panel);border-bottom:1px solid var(--line);position:relative}
+.top::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,var(--accent),transparent 45%)}
+.top .in{max-width:1240px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:18px}
+.logo{width:64px;height:64px;border-radius:50%;box-shadow:0 0 0 1px var(--ring);flex:none;display:block;object-fit:cover}
+img.logo{width:64px;height:64px;border-radius:50%;box-shadow:0 0 0 1px var(--ring);flex:none;display:block;object-fit:cover}
+.co{display:block;font:600 32px/1.1 "Cormorant Garamond",Georgia,serif;letter-spacing:.2px}
+.motto{display:block;margin:5px 0 0;font:italic 500 14px/1.2 "Cormorant Garamond",Georgia,serif;letter-spacing:0;color:var(--muted)}
+.ghost{border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:999px;padding:6px 14px;font:600 13px Inter,system-ui,sans-serif;cursor:pointer}
+.ghost:hover{border-color:var(--ink)}
+.fmt{display:inline-flex; gap:3px; align-items:center; padding:3px; border:1px solid var(--line); border-radius:999px; background:var(--panel2)}
+.fmt button{border:0; background:transparent; padding:6px 12px; border-radius:999px; font:600 12px Inter,sans-serif; color:var(--muted); cursor:pointer; min-height:32px; line-height:1}
+.fmt button[aria-pressed="true"]{background:var(--panel); color:var(--ink); box-shadow:0 0 0 1px var(--line); border:1px solid var(--line); font-weight:700}
+.fmt button:hover{color:var(--ink)}
+.top-actions{margin-left:auto; display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+.wrap{max-width:1240px;margin:0 auto;padding:32px 24px 24px}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:center}
+h1{font-size:clamp(44px,6.4vw,78px);line-height:.92;letter-spacing:-.5px}
+.sub{margin:14px 0 0;color:var(--muted);max-width:54ch;font-size:17px}
+.pill{display:inline-flex;gap:8px;align-items:center;margin-top:18px;padding:6px 14px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--muted);background:var(--panel)}
+.pill svg{width:14px;height:14px;flex:none;color:var(--accent)}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}
+.modes button{padding:16px;text-align:left;border-radius:16px;border:1px solid var(--line);background:var(--panel);cursor:pointer}
+.modes button[aria-selected="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.modes b{display:block;font-size:16px}
+.modes span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
+.helpbar{display:flex; gap:12px; flex-wrap:wrap; margin:16px 0}
+.help-modal{position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:2000; display:flex; align-items:center; justify-content:center; padding:16px}
+.help-modal[hidden]{display:none !important}
+.help-card{max-width:860px; width:100%; max-height:90vh; overflow:auto; background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:24px 28px; box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.help-card h3{margin-top:20px; color:var(--accent)}
+.drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;min-height:210px;padding:28px;border:2px dashed var(--ring);border-radius:20px;background:var(--panel);cursor:pointer;transition:border-color .15s,background .15s}
+.drop:hover,.drop.over,.drop:focus-visible{border-color:var(--accent);background:var(--panel2);outline:none}
+.drop svg{width:44px;height:44px;color:var(--accent);margin-bottom:6px}
+.drop b{font-size:19px;font-weight:700}.drop span{color:var(--muted);font-size:14px}
+#status{margin:18px 0 0;color:var(--muted);font-size:14px;min-height:21px}
+progress{appearance:none;-webkit-appearance:none;width:100%;height:6px;border:0;border-radius:3px;overflow:hidden;background:var(--line);margin-top:10px;display:block}
+progress::-webkit-progress-bar{background:var(--line)}progress::-webkit-progress-value{background:var(--accent)}progress::-moz-progress-bar{background:var(--accent)}
+#err{margin-top:12px;padding:14px 16px;border:1px solid var(--accent);border-radius:12px;background:var(--panel);max-width:75ch}
+#err small{display:block;color:var(--muted);margin-top:6px;word-break:break-word}
+.row2{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:12px 0}
+.views{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0 0}
+.stage{position:relative;background:#070a08;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+.stage video,.stage canvas.b{width:100%;height:auto;max-height:68vh;object-fit:contain;display:block}
+#ov{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;cursor:pointer}
+.chip{position:absolute;left:12px;bottom:12px;padding:3px 11px;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:600;backdrop-filter:blur(6px);pointer-events:none}
+.cap,#ang{color:var(--muted);font-size:14px;margin:10px 4px 0;min-height:21px}
+.ctl{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px;padding:10px 18px;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+button{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:8px 18px;font:600 14px Inter,system-ui,sans-serif;cursor:pointer;transition:border-color .15s}
+button:hover{border-color:var(--ink)}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.playbtn{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);min-width:96px;padding:9px 24px}.playbtn:hover{border-color:var(--accent);filter:brightness(1.08)}
+.scrw{flex:1;min-width:200px}
+#scr{-webkit-appearance:none;appearance:none;width:100%;height:6px;margin:8px 0 0;border-radius:3px;background:var(--line)}
+#scr::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--accent);border:2px solid var(--panel);box-shadow:0 0 0 1px var(--accent)}
+#scr::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:var(--accent);border:2px solid var(--panel)}
+#tl{position:relative;height:6px;margin-top:4px;border-radius:3px}
+#tl i{position:absolute;top:0;bottom:0;background:#e6b800;border-radius:3px;min-width:4px}
+#tm{font-variant-numeric:tabular-nums;color:var(--muted);font-size:14px}
+select{padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);font-size:14px}
+.seg2{display:inline-flex;gap:3px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--panel2)}
+.seg2 button{border:0;background:transparent;padding:6px 12px;border-radius:999px;font:600 12px Inter,sans-serif;color:var(--muted);cursor:pointer}
+.seg2 button[aria-pressed="true"]{background:var(--panel);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);margin:16px 0}
+.card h3{margin:0 0 8px}
+.note{color:var(--muted);font-size:13px}
+.banner{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:16px 0}
+.how{margin:12px 0}
+.how summary{cursor:pointer;color:var(--accent);font-weight:600}
+.chartWrap{position:relative; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px; margin:12px 0}
+.chartWrap canvas{width:100%; height:220px; display:block}
+.badge{display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; background:var(--panel2); border:1px solid var(--line); font-size:12px; margin:4px}
+.badge.gold{background:#fff7e0; border-color:#f2c94c; color:#7a5a00}
+.badge.green{background:#e0f5e8; border-color:var(--accent); color:var(--ink)}
+.badge.blue{background:#e0f0ff; border-color:#4a90e2; color:#1a3a5a}
+.pressure{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:12px 0}
+.pressure .foot{height:80px; background:var(--panel2); border:1px solid var(--line); border-radius:12px; position:relative; overflow:hidden}
+.pressure .fill{position:absolute; bottom:0; left:0; right:0; background:var(--accent); opacity:0.6}
+@media (max-width: 860px){
+  .hero{grid-template-columns:1fr; gap:20px}
+  .views{grid-template-columns:1fr; gap:16px}
+  .wrap{padding:20px 16px 16px}
+  .top .in{padding:12px 16px}
+  .modes{grid-template-columns:1fr}
+  .stage video,.stage canvas.b{max-height:54vh}
+}
+body.format-phone .views{ grid-template-columns:1fr !important }
+body.format-phone .hero{ grid-template-columns:1fr !important }
+body.format-desktop .wrap{ max-width:1360px }
+body.format-desktop .views{ grid-template-columns:1.15fr .85fr; gap:28px }
+body.format-desktop .stage video, body.format-desktop .stage canvas.b{ max-height:74vh }
+</style>
+</head>
+<body>
+<div class="top"><div class="in">
+ <img class="logo" alt="Schmied Research And Development logo: a hammer above an anvil inside a black circle" src="data:image/png;base64,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">
+ <div class="bt"><div class="co">Schmied Research And Development Pty Ltd</div>
+ <p class="motto">Seeking only peace and friendship, to teach if we are called upon, to be taught if we are fortunate.</p></div>
+ <div class="top-actions">
+  <div class="fmt" id="fmt" role="group" aria-label="Layout format">
+    <button data-fmt="auto" aria-pressed="true" title="Auto-detect phone vs desktop">Auto</button>
+    <button data-fmt="desktop" aria-pressed="false">Desktop</button>
+    <button data-fmt="phone" aria-pressed="false">Phone</button>
+  </div>
+  <button class="ghost" id="theme" aria-label="Switch theme">Light / Dark</button>
+ </div>
+</div></div>
+<div class="wrap">
+<div class="hero">
+ <div>
+  <h1>Golf Coach</h1>
+  <p class="sub">Drop a swing – driver to putter – and Coach tracks body frame by frame, draws skeleton + pro ghost + alignment sticks + tracer + pressure mat, checks plane, rotation, tempo, and writes what to fix. Everything runs on your device. Enhanced for usefulness & fun.</p>
+  <span class="pill">✨ New: Alignment sticks, ball position, tempo metronome, gapping, daily challenge, voice coaching, video export, side-by-side</span>
+ </div>
+ <div class="card">
+  <h3>Enhanced for Golfers – Usefulness & Enjoyment</h3>
+  <ul style="margin:8px 0 0 18px">
+   <li><b>Pro ghost:</b> ideal pose for each shot & phase, race vs ideal</li>
+   <li><b>Alignment sticks:</b> target line + ball position checker (Face-On & DTL)</li>
+   <li><b>Shot tracer:</b> estimated ball flight from club path & face</li>
+   <li><b>Pressure mat:</b> weight shift visualization lead/trail</li>
+   <li><b>Tempo metronome:</b> audio beep 3:1 driver, 1:1 putt</li>
+   <li><b>Video export:</b> skeleton + ghost + tracer overlay WebM</li>
+   <li><b>Charts:</b> shoulder turn, tempo, X-factor over time & bag gapping</li>
+   <li><b>Drills library:</b> 20+ drills with when/how</li>
+   <li><b>Achievements:</b> badges, streaks, daily challenge</li>
+  </ul>
+ </div>
+</div>
+
+<div class="modes" id="modes" role="tablist" aria-label="Modes">
+  <button role="tab" id="tabU" aria-selected="true" aria-controls="mode-upload"><b>Analyze Swing</b><span>Any shot, skeleton + ghost + tracer + pressure mat + coaching report.</span></button>
+  <button role="tab" id="tabB" aria-selected="false" aria-controls="mode-bag"><b>Full Bag & Gapping</b><span>Compare driver to putter, gapping distances, posture gaps.</span></button>
+  <button role="tab" id="tabL" aria-selected="false" aria-controls="mode-live"><b>Live Range + Voice</b><span>Camera with spoken Address, Top, Impact, tempo metronome, auto-capture.</span></button>
+</div>
+
+<div class="helpbar" id="helpbar">
+  <button id="btnManual" class="ghost">📄 Manual</button>
+  <button id="btnHelp" class="ghost">❓ Help</button>
+  <button id="btnInstall" class="ghost" hidden>⬇️ Install</button>
+  <button id="btnGithub" class="ghost">🚀 GitHub</button>
+  <button id="btnDrills" class="ghost">🏌️ Drills</button>
+  <button id="btnAch" class="ghost">🏆 Achievements</button>
+  <button id="btnExport" class="ghost">🎥 Export Video</button>
+  <button id="btnCompare" class="ghost">↔️ Side-by-Side</button>
+  <button id="btnMetronome" class="ghost">🥁 Metronome</button>
+</div>
+
+<div id="mode-upload" role="tabpanel" aria-labelledby="tabU">
+<div class="drop" id="drop" role="button" tabindex="0" aria-label="Drop a golf swing video or click to choose">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+  <b>Drop a golf swing here</b><span>or click to choose. MP4 H.264 works best. Driver to putter.</span>
+  <input type="file" id="vf" accept="video/*" style="position:absolute;width:1px;height:1px;overflow: style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0";opacity:0">
+</div>
+
+<div class="row2">
+  <span class="note">Shot</span>
+  <select id="shot"><option value="driver">Driver</option><option value="wood">Fairway Wood</option><option value="hybrid">Hybrid</option><option value="longiron">Long Iron (3-5)</option><option value="midiron" selected>Mid Iron (6-7)</option><option value="shortiron">Short Iron (8-9)</option><option value="pw">Pitching Wedge</option><option value="gw">Gap Wedge</option><option value="sw">Sand Wedge</option><option value="lw">Lob Wedge</option><option value="pitch">Pitch (30-50y)</option><option value="chip">Chip</option><option value="bunker">Bunker</option><option value="putt">Putt</option></select>
+  <span class="note">View</span><select id="viewAng"><option value="face" selected>Face-On</option><option value="dtl">Down-The-Line</option></select>
+  <span class="note">Hand</span><select id="hand"><option value="right" selected>Right-handed</option><option value="left">Left-handed</option></select>
+  <span class="note">Level</span><select id="level"><option value="beginner">Beginner</option><option value="intermediate" selected>Intermediate</option><option value="advanced">Advanced</option></select>
+</div>
+
+<div class="row2"><span class="note">Speed</span><div class="seg2" id="speed"><button data-k="lite" aria-pressed="true">Fast</button><button data-k="full" aria-pressed="false">Precise</button></div>
+<span class="note">Ghost</span><select id="ghostmode"><option value="ideal">Ideal ghost</option><option value="race">Pro ghost race</option><option value="off">Off</option></select>
+<label class="sw"><input type="checkbox" id="tracer" checked><i></i> Tracer</label>
+<label class="sw"><input type="checkbox" id="sticks" checked><i></i> Alignment sticks</label>
+<label class="sw"><input type="checkbox" id="pressure" checked><i></i> Pressure mat</label>
+<label class="sw"><input type="checkbox" id="balltrace" checked><i></i> Ball trace</label>
+<select id="ballColor" title="Ball color"><option value="auto" selected>Auto ball</option><option value="white">White</option><option value="yellow">Yellow</option></select>
+<label class="sw"><span class="note" style="margin-right:4px">Sens</span><input type="range" id="ballSens" min="1" max="10" value="5" style="width:70px"></label>
+<button class="ghost" id="clearBall" title="Clear ball trace">Clear ball</button>
+</div>
+
+<p id="status">Choose a swing. First run downloads pose model ~10MB.</p>
+<progress id="prog" max="1" value="0" hidden></progress>
+<div id="err" role="alert" hidden></div>
+
+<section class="views">
+ <div><div class="stage"><video id="vid" playsinline muted preload="auto"></video><canvas id="ov"></canvas><span class="chip">Video + Ghost + Tracer</span></div><p class="cap">Video with pro ghost, alignment sticks, tracer.</p></div>
+ <div><div class="stage"><canvas id="sk" class="b"></canvas><span class="chip">Skeleton + Pressure Mat</span></div><p id="ang">Live: spine, knee, shoulder, hip, X-factor, weight, ball position.</p>
+  <div class="pressure" id="pressureMat"><div class="foot" id="footLead"><div class="fill" id="fillLead" style="height:50%"></div><span class="chip">Lead</span></div><div class="foot" id="footTrail"><div class="fill" id="fillTrail" style="height:50%"></div><span class="chip">Trail</span></div></div>
+ </div>
+</section>
+
+<div class="ctl">
+  <button class="playbtn" id="play">Play</button>
+  <button id="slow05">0.5x</button><button id="slow025">0.25x</button><button id="norm1">1x</button><button id="fast2">2x</button>
+  <div class="scrw"><input type="range" id="scr" min="0" max="1000" value="0"><div id="tl"></div></div>
+  <span id="tm">0.0s</span>
+  <select id="phaseJump"><option value="">Jump to phase</option><option value="address">Address</option><option value="takeaway">Takeaway</option><option value="backswing">Backswing</option><option value="top">Top</option><option value="downswing">Downswing</option><option value="impact">Impact</option><option value="follow">Follow-through</option><option value="finish">Finish</option></select>
+</div>
+
+<div id="out"></div>
+
+<div class="chartWrap"><h4>Progress – Shoulder turn, Tempo, X-factor over time – Bag Gapping – Fun</h4><canvas id="progressChart"></canvas><p class="note">Tracks improvement. Lower pop-up? For golf: higher shoulder turn, ideal tempo 3:1 driver, X-factor power.</p></div>
+<div class="chartWrap"><h4>Gapping – Estimated carry by shot (based on swing speed & smash) – Usefulness</h4><canvas id="gappingChart"></canvas><p class="note">Driver 220-300y, 7-iron 150y etc. Based on tempo & rotation. Calibrate with real distances.</p></div>
+
+<div class="card" id="shareCard">
+  <h3>Share & Export – Enhanced</h3>
+  <div class="row2">
+    <input id="sname" placeholder="Student name" style="padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel2)">
+    <button id="saveSess">Save session</button><button id="xcard">Export card PNG</button><button id="xpdf">Save report PDF with grabs</button><button id="xshare">Share card</button><button id="xwa">WhatsApp</button>
+  </div>
+</div>
+</div>
+
+<div id="mode-bag" role="tabpanel" aria-labelledby="tabB" hidden>
+  <div class="card"><h3>Full Bag & Gapping – Enhanced Usefulness</h3><p class="note">Save driver to putter, see posture gaps, tempo gaps, estimated distances. Daily challenge: hit ideal tempo 3 times in a row.</p><div id="bagOut"></div><button id="dailyChallenge" class="ghost">🎯 Daily Challenge – 3 ideal tempos</button><div id="dailyOut" class="note"></div></div>
+</div>
+
+<div id="mode-live" role="tabpanel" aria-labelledby="tabL" hidden>
+  <div class="card"><h3>Live Range + Voice + Metronome + Auto-Capture</h3>
+    <div class="row2"><select id="liveShot"><option value="driver">Driver</option><option value="midiron" selected>Mid Iron</option><option value="putt">Putt</option></select><select id="liveCam"><option value="auto">Auto camera</option></select><select id="voice"><option value="female">Female coach</option><option value="male">Male coach</option><option value="off">Voice off</option></select><button id="lstart">Start camera</button><button id="lgo" disabled>Start range</button><button id="lstop" disabled>Finish</button><button id="lMetronome" class="ghost">🥁 Metronome on</button></div>
+    <div id="liveStage" class="stage" style="margin-top:12px; min-height:300px; background:#0a1410"><video id="liveVid" autoplay playsinline muted style="width:100%; max-height:60vh"></video></div>
+    <p id="lstat" class="note">Live: speaks Address, Top, Impact, tempo, auto-captures swing when top detected.</p>
+  </div>
+</div>
+
+<div id="studentsCard" class="card"><h3>Students & Progress – Enhanced</h3><div id="stuOut" class="note">No saved sessions yet.</div><div id="trend"></div></div>
+</div>
+
+<div id="helpModal" class="help-modal" hidden><div class="help-card">
+<h2 id="helpTitle">Golf Coach – Enhanced Help</h2>
+<p class="note">Version enhanced – Pro ghost, tracer, alignment sticks, pressure mat, video export, charts, drills, achievements, metronome, gapping, daily challenge.</p>
+<h3>New for Usefulness & Enjoyment</h3>
+<ul>
+<li><b>Alignment sticks:</b> Face-On draws target line (feet line) + ball position line (ideal for shot). DTL draws target line + spine line. Toggle in row2.</li>
+<li><b>Ball position checker:</b> Shows ball position % between feet, ideal per shot (driver lead heel, iron center, wedge center-back). Live readout.</li>
+<li><b>Shot tracer:</b> Estimates club path from wrist path angle at impact, draws tracer line from impact with fade/draw based on path vs face (estimated from shoulder/hip). Toggle.</li>
+<li><b>Pressure mat:</b> Two feet, fill height = weight % lead/trail. At impact ideal 80% lead driver, 50% putt. Visual.</li>
+<li><b>Tempo metronome:</b> Click 🥁 Metronome, beeps backswing 3 counts, downswing 1 for driver, 1:1 for putt. Uses Web Audio API.</li>
+<li><b>Video export:</b> 🎥 Export Video records skeleton + ghost + tracer + sticks as WebM, save & share with coach.</li>
+<li><b>Side-by-Side & Before/After:</b> ↔️ Compare loads second video or saves before, shows improvement in pro score, shoulder turn, tempo.</li>
+<li><b>Progress charts:</b> Shoulder turn, tempo, X-factor over time, gapping estimated carry. Motivates practice.</li>
+<li><b>Drills library:</b> 20+ drills – alignment, ball position, tempo, rotation, weight shift, head stability.</li>
+<li><b>Achievements:</b> Badges – first swing, 10 sessions, 8/10, fast tempo, full turn, daily challenge streak. Fun.</li>
+<li><b>Gapping:</b> Estimates carry based on rotation & tempo, driver 220-300y, 7-iron 150y. Calibrate with real.</li>
+<li><b>Daily challenge:</b> Hit ideal tempo 3x in a row for selected shot – gamified.</li>
+<li><b>Club recommendation:</b> Based on faults – e.g., early extension → check spine, weight shift → pressure mat drill.</li>
+</ul>
+<button id="closeHelp" class="ghost">Close</button>
+</div></div>
+
+<div id="drillsModal" class="help-modal" hidden><div class="help-card"><h2>Drills Library – 20+ drills – Usefulness</h2><div id="drillsList"></div><button id="closeDrills" class="ghost">Close</button></div></div>
+<div id="achModal" class="help-modal" hidden><div class="help-card"><h2>Achievements – Fun & Motivation</h2><div id="achList"></div><button id="closeAch" class="ghost">Close</button></div></div>
+<div id="compareModal" class="help-modal" hidden><div class="help-card"><h2>Side-by-Side & Before/After – Enjoyment</h2><div id="compareOut"></div><button id="closeCompare" class="ghost">Close</button></div></div>
+
+<script type="importmap">{"imports":{"@mediapipe/tasks-vision":"https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.20/vision_bundle.mjs"}}</script>
+<script>window.__ok=false;setTimeout(function(){if(!window.__ok)document.getElementById('err').hidden=false,document.getElementById('err').innerHTML='Pose library not loaded. Check internet.','module not started'},15000);</script>
+<script type="module">
+import {PoseLandmarker,FilesetResolver} from "@mediapipe/tasks-vision";
+const $=s=>document.querySelector(s),v=$('#vid'),ov=$('#ov'),sk=$('#sk');
+const IDX=[0,11,12,13,14,15,16,23,24,25,26,27,28];
+const BONES=[[1,2],[1,3],[3,5],[2,4],[4,6],[1,7],[2,8],[7,8],[7,9],[9,11],[8,10],[10,12]],LEFT=new Set([1,3,5,7,9,11]);
+let seed=null,lm=null,F=[],S=[],M=[],phases=[],FPS=15,ar=1,ts=0,busy=false,mode='upload';
+window.__ok=true;$('#err').hidden=true;
+const say=t=>$('#status').textContent=t;
+const el=(tag,txt,par,cls)=>{const e=document.createElement(tag);if(txt!=null)e.textContent=txt;if(cls)e.className=cls;(par||$('#out')).append(e);return e};
+const QPATH='https://storage.googleapis.com/mediapipe-models/pose_landmarker/';
+let FS=null,gpuOK=true,quality='lite';const LMS={};
+async function model(kind='lite',cpu=false){const gpu=gpuOK&&!cpu,key=kind+(gpu?'G':'C');if(LMS[key])return LMS[key];
+ FS=FS||await FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.20/wasm');
+ try{return LMS[key]=await PoseLandmarker.createFromOptions(FS,{baseOptions:{modelAssetPath:QPATH+'pose_landmarker_'+kind+'/float16/1/pose_landmarker_'+kind+'.task',delegate:gpu?'GPU':'CPU'},runningMode:'VIDEO',numPoses:3})}
+ catch(e){if(!gpu)throw e;gpuOK=false;return model(kind)}}
+const seek=t=>new Promise(ok=>{if(Math.abs(v.currentTime-t)<1e-3&&v.readyState>=2)return ok(); const f=()=>{v.removeEventListener('seeked',f);ok()};v.addEventListener('seeked',f);setTimeout(f,3000);v.currentTime=t});
+const eta=(t0,f)=>f>.02?Math.round((performance.now()-t0)/1000*(1-f)/f):'?';
+function playPass(n,run,pg){return new Promise(res=>{let last=-1,dsum=0,dn=0,done=false,wd=performance.now();const t0=performance.now();
+ const finish=ok=>{if(done)return;done=true;clearInterval(w);v.pause();res(ok)};
+ const tick=(now,meta)=>{if(done)return;wd=performance.now();const i=Math.round(meta.mediaTime*FPS);
+  if(i>last&&i<=n){const a=performance.now(),P=run();dsum+=performance.now()-a;dn++;F[i]={t:i/FPS,P};last=i;
+   if(dn%6===0){v.playbackRate=Math.max(.5,Math.min(4,.8*(1000/FPS)/Math.max(dsum/dn,1)));const f=i/n;pg.value=f;say('Analysing '+Math.round(f*100)+'% on this computer, about '+eta(t0,f)+' s left...')}}
+  if(meta.mediaTime>=v.duration-.05||v.ended)return finish(true);v.requestVideoFrameCallback(tick)};
+ const w=setInterval(()=>{if(performance.now()-wd>5000)finish(false)},1000);
+ v.muted=true;v.playbackRate=1;v.currentTime=0;v.onended=()=>finish(true);
+ v.play().then(()=>v.requestVideoFrameCallback(tick)).catch(()=>finish(false))}
+const vis=(p,...ids)=>ids.every(i=>p[i]&&p[i][2]>.3);
+const ang=(a,b,c)=>{const ab=[a[0]-b[0],a[1]-b[1]],cb=[c[0]-b[0],c[1]-b[1]];const d=Math.hypot(...ab)*Math.hypot(...cb);if(!d)return null;let cos=(ab[0]*cb[0]+ab[1]*cb[1])/d;cos=Math.max(-1,Math.min(1,cos));return Math.acos(cos)*180/Math.PI};
+const cen=a=>{let x=0,y=0,n=0;for(const p of a)if(p){x+=p[0];y+=p[1];n++}return n?[x/n,y/n]:null};
+const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
+const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
+const nn=a=>a.filter(x=>x!=null);
+const sm=(a,k=2)=>a.map((_,i)=>{let s=0,n=0;for(let j=i-k;j<=i+k;j++)if(a[j]!=null){s+=a[j];n++}return n?s/n:null});
+const SHOT_CFG={
+ driver:{name:'Driver',stance:1.5,shoulder:90,hip:45,xFactor:45,knee:140,spine:35,tempo:3,weight:0.8,ballPos:0.75},
+ wood:{name:'Fairway Wood',stance:1.4,shoulder:85,hip:42,xFactor:42,knee:142,spine:38,tempo:3,weight:0.75,ballPos:0.65},
+ hybrid:{name:'Hybrid',stance:1.3,shoulder:80,hip:40,xFactor:40,knee:145,spine:40,tempo:3,weight:0.7,ballPos:0.6},
+ longiron:{name:'Long Iron (3-5)',stance:1.2,shoulder:80,hip:38,xFactor:42,knee:145,spine:40,tempo:3,weight:0.7,ballPos:0.55},
+ midiron:{name:'Mid Iron (6-7)',stance:1.1,shoulder:75,hip:35,xFactor:40,knee:145,spine:40,tempo:3,weight:0.7,ballPos:0.5},
+ shortiron:{name:'Short Iron (8-9)',stance:1.0,shoulder:70,hip:32,xFactor:38,knee:145,spine:40,tempo:2.8,weight:0.65,ballPos:0.45},
+ pw:{name:'Pitching Wedge',stance:0.9,shoulder:65,hip:28,xFactor:37,knee:148,spine:42,tempo:2.5,weight:0.6,ballPos:0.4},
+ gw:{name:'Gap Wedge',stance:0.9,shoulder:60,hip:25,xFactor:35,knee:148,spine:42,tempo:2.5,weight:0.6,ballPos:0.4},
+ sw:{name:'Sand Wedge',stance:0.9,shoulder:60,hip:25,xFactor:35,knee:150,spine:42,tempo:2.5,weight:0.6,ballPos:0.4},
+ lw:{name:'Lob Wedge',stance:0.8,shoulder:55,hip:22,xFactor:33,knee:150,spine:44,tempo:2.5,weight:0.55,ballPos:0.35},
+ pitch:{name:'Pitch (30-50y)',stance:0.8,shoulder:45,hip:18,xFactor:27,knee:150,spine:44,tempo:2,weight:0.5,ballPos:0.35},
+ chip:{name:'Chip',stance:0.6,shoulder:20,hip:8,xFactor:12,knee:155,spine:45,tempo:1.5,weight:0.5,ballPos:0.35},
+ bunker:{name:'Bunker',stance:1.1,shoulder:70,hip:30,xFactor:40,knee:145,spine:40,tempo:2.5,weight:0.6,ballPos:0.6},
+ putt:{name:'Putt',stance:0.6,shoulder:10,hip:5,xFactor:5,knee:165,spine:45,tempo:1,weight:0.5,ballPos:0.5}
+};
+function fm(p){
+ if(!p||!vis(p,1,2,7,8)) return null;
+ const ms=[(p[1][0]+p[2][0])/2,(p[1][1]+p[2][1])/2],mh=[(p[7][0]+p[8][0])/2,(p[7][1]+p[8][1])/2],tl=dist(ms,mh); if(tl<.02) return null;
+ const shoulderAngle=Math.atan2(p[2][1]-p[1][1], p[2][0]-p[1][0])*180/Math.PI;
+ const hipAngle=Math.atan2(p[8][1]-p[7][1], p[8][0]-p[7][0])*180/Math.PI;
+ const spineAngle=Math.atan2(Math.abs((ms[0]-mh[0])*ar), Math.abs(ms[1]-mh[1]))*180/Math.PI;
+ const kl=vis(p,7,9,11)?ang(p[7],p[9],p[11]):null;
+ const kr=vis(p,8,10,12)?ang(p[8],p[10],p[12]):null;
+ const sw=vis(p,11,12)?dist(p[11],p[12])/tl:null;
+ const wristMid=cen([p[5],p[6]]);
+ const nose=p[0];
+ const head=nose? (ms[1]-nose[1])/tl : null;
+ let weightShift=null, stanceMid=null;
+ if(vis(p,11,12)){
+   stanceMid=[(p[11][0]+p[12][0])/2,(p[11][1]+p[12][1])/2];
+   const stanceW=dist(p[11],p[12]);
+   if(stanceW>0) weightShift=(mh[0]-stanceMid[0])/stanceW;
+ }
+ // ball position estimation: foot line mid to wrist projection
+ let ballPos=null;
+ if(vis(p,11,12) && wristMid){
+   const footLeft=p[11], footRight=p[12];
+   const stanceWidth=dist(footLeft, footRight);
+   if(stanceWidth>0){
+     // project wrist onto foot line
+     const t=((wristMid[0]-footLeft[0])*(footRight[0]-footLeft[0]) + (wristMid[1]-footLeft[1])*(footRight[1]-footLeft[1])) / (stanceWidth*stanceWidth);
+     ballPos=Math.max(0,Math.min(1,t));
+   }
+ }
+ return {ms,mh,tl,spine:spineAngle,kl,kr,sw,head,wrist:wristMid,shoulderAngle,hipAngle,stanceMid,weightShift,ballPos,nose,P:p}
+}
+function series(){
+ M=S.map(fm);
+ const wy=sm(M.map(m=>m&&m.wrist?m.wrist[1]:null),3);
+ const wx=sm(M.map(m=>m&&m.wrist?m.wrist[0]:null),3);
+ const sh=sm(M.map(m=>m&&m.shoulderAngle!=null?m.shoulderAngle:null),3);
+ const hipA=sm(M.map(m=>m&&m.hipAngle!=null?m.hipAngle:null),3);
+ const ws=sm(M.map(m=>m&&m.weightShift!=null?m.weightShift:null),3);
+ M.forEach((m,i)=>{if(m){m.wy=wy[i]; m.wx=wx[i]; m.sh=sh[i]; m.hipA=hipA[i]; m.ws=ws[i];}});
+ phases=[];
+ if(!M.length) return;
+ const valid=M.map((m,i)=>m&&m.wy!=null?i:null).filter(x=>x!=null);
+ if(valid.length<10) return;
+ const addrIdx=valid[0];
+ const addrWy=wy[addrIdx];
+ const searchEnd=Math.floor(M.length*0.7);
+ let topIdx=addrIdx, minWy=Infinity;
+ for(let i=addrIdx;i<searchEnd;i++){ if(wy[i]!=null && wy[i]<minWy){minWy=wy[i]; topIdx=i;} }
+ let impactIdx=null, maxVel=-Infinity;
+ for(let i=topIdx+1;i<M.length-1;i++){
+   if(wy[i]==null||wy[i+1]==null) continue;
+   const vel=wy[i+1]-wy[i];
+   if(wy[i]>=addrWy-0.05 && wy[i]<=addrWy+0.15 && vel>maxVel){ maxVel=vel; impactIdx=i; }
+ }
+ if(!impactIdx) impactIdx=Math.min(M.length-1, topIdx+Math.floor(FPS*0.5));
+ let finishIdx=impactIdx, minWy2=Infinity;
+ for(let i=impactIdx+1;i<M.length;i++){ if(wy[i]!=null && wy[i]<minWy2){minWy2=wy[i]; finishIdx=i;} }
+ const takeawayIdx=Math.floor(addrIdx + (topIdx-addrIdx)*0.25);
+ const backswingIdx=Math.floor(addrIdx + (topIdx-addrIdx)*0.6);
+ const downswingIdx=Math.floor(topIdx + (impactIdx-topIdx)*0.5);
+ const followIdx=Math.floor(impactIdx + (finishIdx-impactIdx)*0.5);
+ phases=[
+   {name:'address', idx:addrIdx, label:'Address'},
+   {name:'takeaway', idx:takeawayIdx, label:'Takeaway'},
+   {name:'backswing', idx:backswingIdx, label:'Backswing'},
+   {name:'top', idx:topIdx, label:'Top'},
+   {name:'downswing', idx:downswingIdx, label:'Downswing'},
+   {name:'impact', idx:impactIdx, label:'Impact'},
+   {name:'follow', idx:followIdx, label:'Follow-through'},
+   {name:'finish', idx:finishIdx, label:'Finish'}
+ ];
+}
+function stats(){
+ if(!M.length) return {};
+ const cfg=SHOT_CFG[$('#shot').value]||SHOT_CFG.midiron;
+ const add=M.filter(Boolean);
+ const shoulderTurn=Math.max(...nn(M.map(m=>m.sh)).map(v=>Math.abs(v)),0) - Math.min(...nn(M.map(m=>m.sh)).map(v=>Math.abs(v)),0);
+ const hipTurn=Math.max(...nn(M.map(m=>m.hipA)).map(v=>Math.abs(v)),0) - Math.min(...nn(M.map(m=>m.hipA)).map(v=>Math.abs(v)),0);
+ const xFactor=mean(nn(add.map(m=>{ if(m.sh!=null&&m.hipA!=null) return Math.abs(m.sh - m.hipA); return null; })));
+ const knee=mean(nn(add.map(m=> (m.kl!=null&&m.kr!=null)?(m.kl+m.kr)/2 : (m.kl||m.kr))));
+ const spine=mean(nn(add.map(m=>m.spine)));
+ const stance=mean(nn(add.map(m=>m.sw)));
+ const weight=phases.find(p=>p.name==='impact')? M[phases.find(p=>p.name==='impact').idx]?.ws : null;
+ const weightShiftRange=(()=>{const w=nn(M.map(m=>m.ws)); if(!w.length) return null; return Math.max(...w)-Math.min(...w);})();
+ const headMove=(()=>{const addrNose=add[0]?.nose; if(!addrNose) return null; const moves=add.map(m=> m.nose? dist(m.nose, addrNose)/m.tl : null); return mean(nn(moves));})();
+ const tempo=(()=>{ const a=phases.find(p=>p.name==='address')?.idx; const t=phases.find(p=>p.name==='top')?.idx; const imp=phases.find(p=>p.name==='impact')?.idx; if(a==null||t==null||imp==null) return null; const back=(F[t].t - F[a].t); const down=(F[imp].t - F[t].t); if(down<=0) return null; return {back, down, ratio: back/down}; })();
+ const wristPath=add.map(m=>m.wrist).filter(Boolean);
+ const ballPos=mean(nn(add.map(m=>m.ballPos)));
+ const clubPath=(()=>{
+   const imp=phases.find(p=>p.name==='impact')?.idx;
+   if(imp==null||imp<3) return null;
+   const before=M[imp-2]?.wx, after=M[imp+2]?.wx;
+   const beforeY=M[imp-2]?.wy, afterY=M[imp+2]?.wy;
+   if(before==null||after==null) return null;
+   const dx=after-before, dy=afterY-beforeY;
+   const angle=Math.atan2(dy,dx)*180/Math.PI;
+   return angle;
+ })();
+ return {shoulderTurn, hipTurn, xFactor, knee, spine, stance, weight, weightShiftRange, headMove, tempo, wristPath, cfg, ballPos, clubPath};
+}
+function findings(s){
+ const L=[];
+ const cfg=s.cfg;
+ const add=(sev,good,title,why,drill,tips)=>L.push({sev,good,title,why,drill,tips});
+ if(s.spine!=null){ const ideal=cfg.spine; const diff=Math.abs(s.spine-ideal); if(diff<5) add(0,1,'Spine angle','Spine '+s.spine.toFixed(1)+'° close to ideal '+ideal+'° for '+cfg.name+'. Good posture.',null,['Keep chest over ball']); else if(diff<10) add(1,0,'Spine angle','Spine '+s.spine.toFixed(1)+'° vs ideal '+ideal+'° – slightly upright/flat.','Wall drill: butt touches wall, hinge.',['Chest over ball']); else add(2,0,'Spine angle','Spine '+s.spine.toFixed(1)+'° vs ideal '+ideal+'° – big posture issue.','Mirror work: check spine 35-45°.',['Hinge from hips']); }
+ if(s.shoulderTurn!=null){ const ideal=cfg.shoulder; if(s.shoulderTurn>=ideal*0.85) add(0,1,'Shoulder turn','Shoulder turn '+s.shoulderTurn.toFixed(0)+'° vs target '+ideal+'° – full coil.',null,['Left shoulder under chin']); else if(s.shoulderTurn>=ideal*0.65) add(1,0,'Shoulder turn','Shoulder turn '+s.shoulderTurn.toFixed(0)+'° vs '+ideal+'° – could be fuller.','Cross arms over chest, rotate.',['Back to target']); else add(2,0,'Shoulder turn','Shoulder turn only '+s.shoulderTurn.toFixed(0)+'° vs '+ideal+'° – short backswing.','Towel under arms drill.',['Turn not lift']); }
+ if(s.hipTurn!=null){ const ideal=cfg.hip; if(s.hipTurn>=ideal*0.7 && s.hipTurn<=ideal*1.4) add(0,1,'Hip turn','Hip turn '+s.hipTurn.toFixed(0)+'° vs ideal '+ideal+'° – good coil.',null,['Hips turn but resist']); else if(s.hipTurn<ideal*0.5) add(1,0,'Hip turn','Hip turn '+s.hipTurn.toFixed(0)+'° vs '+ideal+'° – restricted.','Hip mobility: seated rotations.',['Let hips turn']); else add(1,0,'Hip turn','Hip turn '+s.hipTurn.toFixed(0)+'° vs '+ideal+'° – a bit much.','Resist hips slightly.',['Feel hips resist']); }
+ if(s.xFactor!=null && cfg.name!=='Putt' && cfg.name!=='Chip'){ const ideal=cfg.xFactor; if(s.xFactor>=ideal*0.8) add(0,1,'X-factor','X-factor '+s.xFactor.toFixed(0)+'° vs '+ideal+'° – good coil.',null,['Maintain separation']); else if(s.xFactor>=ideal*0.5) add(1,0,'X-factor','X-factor '+s.xFactor.toFixed(0)+'° vs '+ideal+'° – could be more.','Hold hips, turn shoulders more.',['Feel stretch']); else add(2,0,'X-factor','X-factor only '+s.xFactor.toFixed(0)+'° vs '+ideal+'° – losing power.','Torso rotation drill.',['Coil not sway']); }
+ if(s.knee!=null){ const ideal=cfg.knee; if(Math.abs(s.knee-ideal)<8) add(0,1,'Knee flex','Knee flex '+s.knee.toFixed(0)+'° vs ideal '+ideal+'° – athletic.',null,['Stay athletic']); else if(Math.abs(s.knee-ideal)<15) add(1,0,'Knee flex','Knee flex '+s.knee.toFixed(0)+'° vs '+ideal+'° – a bit off.','Wall sit feel.',['Athletic stance']); else add(2,0,'Knee flex','Knee flex '+s.knee.toFixed(0)+'° vs '+ideal+'° – posture needs work.','Check in mirror.',['Stay athletic']); }
+ if(s.stance!=null){ const ideal=cfg.stance; if(Math.abs(s.stance-ideal)<0.25) add(0,1,'Stance width','Stance '+s.stance.toFixed(2)+' vs ideal '+ideal+' – good base.',null,['Width matches shot']); else if(Math.abs(s.stance-ideal)<0.5) add(1,0,'Stance width','Stance '+s.stance.toFixed(2)+' vs ideal '+ideal+' – slightly narrow/wide.','Use clubhead as ruler.',['Adjust width']); else add(2,0,'Stance width','Stance '+s.stance.toFixed(2)+' vs ideal '+ideal+' – affects balance.','Practice widths.',['Base supports swing']); }
+ if(s.weightShiftRange!=null){ if(cfg.name==='Putt'){ if(s.weightShiftRange<0.15) add(0,1,'Weight & Balance','Weight shift range '+s.weightShiftRange.toFixed(2)+' – stable for putt.',null,['Stay centered']); else add(1,0,'Weight shift (putt)','Weight shift '+s.weightShiftRange.toFixed(2)+' – too much for putt.','Head still, pendulum.',['Quiet lower']); } else if(s.weightShiftRange>=0.3) add(0,1,'Weight shift','Weight shift range '+s.weightShiftRange.toFixed(2)+' – good transfer.',null,['Feel pressure to lead']); else if(s.weightShiftRange>=0.15) add(1,0,'Weight shift','Weight shift range '+s.weightShiftRange.toFixed(2)+' – could be more.','Step drill.',['Shift not sway']); else add(2,0,'Weight shift','Weight shift only '+s.weightShiftRange.toFixed(2)+' – hanging back.','Pump drill.',['Get to lead']); }
+ if(s.headMove!=null){ if(s.headMove<0.15) add(0,1,'Head stability','Head movement '+s.headMove.toFixed(2)+' – very stable.',null,['Keep steady']); else if(s.headMove<0.3) add(1,0,'Head movement','Head movement '+s.headMove.toFixed(2)+' – a bit much.','Headcover under chin.',['Eye on ball']); else add(2,0,'Head movement','Head movement '+s.headMove.toFixed(2)+' – excessive.','Tee drill: head behind ball.',['Stay behind ball']); }
+ if(s.tempo){ const ideal=cfg.tempo; const r=s.tempo.ratio; if(Math.abs(r-ideal)<0.5) add(0,1,'Tempo','Tempo '+r.toFixed(1)+':1 vs ideal '+ideal+':1 – good rhythm.',null,['Smooth rhythm']); else if(Math.abs(r-ideal)<1) add(1,0,'Tempo','Tempo '+r.toFixed(1)+':1 vs ideal '+ideal+':1 – a bit quick/slow.','Metronome drill: 3 counts back, 1 down.',['Count']); else add(2,0,'Tempo','Tempo '+r.toFixed(1)+':1 vs ideal '+ideal+':1 – rhythm needs work.','Slow backswing, quick through.',['Back slow']); }
+ if(s.ballPos!=null){ const ideal=cfg.ballPos; if(Math.abs(s.ballPos-ideal)<0.1) add(0,1,'Ball position','Ball position '+s.ballPos.toFixed(2)+' vs ideal '+ideal+' for '+cfg.name+' – good.',null,['Ball position correct']); else if(Math.abs(s.ballPos-ideal)<0.2) add(1,0,'Ball position','Ball position '+s.ballPos.toFixed(2)+' vs ideal '+ideal+' – slightly forward/back.','Check ball position relative to feet.',['Adjust']); else add(2,0,'Ball position','Ball position '+s.ballPos.toFixed(2)+' vs ideal '+ideal+' – affects contact.','Use alignment stick for ball position.',['Check']); }
+ if(s.clubPath!=null){ if(Math.abs(s.clubPath)<5) add(0,1,'Club path','Club path '+s.clubPath.toFixed(1)+'° – square, good.',null,['Square path']); else if(Math.abs(s.clubPath)<12) add(1,0,'Club path','Club path '+s.clubPath.toFixed(1)+'° – slightly inside-out/outside-in.','Check alignment sticks, feel path.',['Path']); else add(2,0,'Club path','Club path '+s.clubPath.toFixed(1)+'° – big path issue, slice/hook.','Gate drill with tees.',['Path']); }
+ return L;
+}
+function proScore(findingsList){ let score=10; findingsList.forEach(f=>{ if(!f.good){ if(f.sev===2) score-=1.5; else if(f.sev===1) score-=0.7; }}); return Math.max(0,Math.min(10, score)); }
+function snap(){ const s=stats(); const f=findings(s); return {pro:proScore(f),findings:f,stats:s,shot:$('#shot').value,view:$('#viewAng').value,hand:$('#hand').value, level:$('#level').value}; }
+
+function draw(canvas, i, hl){
+ const ctx=canvas.getContext('2d');
+ const W=canvas.width,H=canvas.height;
+ ctx.clearRect(0,0,W,H);
+ if(!F[i]||!F[i].P) return;
+ const p=F[i].P;
+ ctx.lineWidth=3; ctx.lineCap='round';
+ BONES.forEach(([a,b])=>{
+   const A=p[a],B=p[b];
+   if(!A||!B||A[2]<0.3||B[2]<0.3) return;
+   const left=LEFT.has(a);
+   ctx.strokeStyle= left? '#ff8c42' : '#4a90e2';
+   ctx.beginPath(); ctx.moveTo(A[0]*W, A[1]*H); ctx.lineTo(B[0]*W, B[1]*H); ctx.stroke();
+ });
+ p.forEach(pt=>{
+   if(!pt||pt[2]<0.3) return;
+   ctx.fillStyle='#fff';
+   ctx.beginPath(); ctx.arc(pt[0]*W, pt[1]*H, 4, 0, Math.PI*2); ctx.fill();
+ });
+ const m=M[i];
+ if(m&&m.ms&&m.mh){
+   ctx.strokeStyle='#ffff00'; ctx.lineWidth=2; ctx.setLineDash([6,4]);
+   ctx.beginPath(); ctx.moveTo(m.ms[0]*W, m.ms[1]*H); ctx.lineTo(m.mh[0]*W, m.mh[1]*H); ctx.stroke();
+   ctx.setLineDash([]);
+ }
+ if($('#sticks').checked && m&&m.sw&&vis(p,11,12)){
+   const l=p[11],r=p[12];
+   ctx.strokeStyle='#00ff88'; ctx.lineWidth=2; ctx.setLineDash([8,6]);
+   ctx.beginPath(); ctx.moveTo(l[0]*W, l[1]*H); ctx.lineTo(r[0]*W, r[1]*H); ctx.stroke();
+   // target line perpendicular to stance? simplified as horizontal extension
+   ctx.strokeStyle='rgba(255,255,255,0.7)'; ctx.lineWidth=1; ctx.setLineDash([4,4]);
+   ctx.beginPath(); ctx.moveTo((l[0]-0.3)*W, l[1]*H); ctx.lineTo((r[0]+0.3)*W, r[1]*H); ctx.stroke();
+   ctx.setLineDash([]);
+   // ball position line
+   if(m.ballPos!=null){
+     const bx = l[0] + (r[0]-l[0])*m.ballPos;
+     ctx.strokeStyle='#ff00ff'; ctx.lineWidth=2; ctx.setLineDash([]);
+     ctx.beginPath(); ctx.moveTo(bx*W, (l[1]-0.2)*H); ctx.lineTo(bx*W, (l[1]+0.1)*H); ctx.stroke();
+   }
+ }
+ if(m&&m.sw&&vis(p,11,12) && $('#pressure').checked){
+   // pressure mat visualized elsewhere, but also draw weight dot
+   const stanceMid=m.stanceMid;
+   if(stanceMid && m.ws!=null){
+     ctx.fillStyle='#ff00ff';
+     ctx.beginPath(); ctx.arc(stanceMid[0]*W + m.ws*dist(p[11],p[12])*W*0.5, m.mh[1]*H, 6,0,Math.PI*2); ctx.fill();
+   }
+ }
+ if(m&&m.nose){
+   ctx.strokeStyle='#00ffff'; ctx.lineWidth=2;
+   ctx.beginPath(); ctx.arc(m.nose[0]*W, m.nose[1]*H, 12,0,Math.PI*2); ctx.stroke();
+ }
+ if($('#tracer').checked && m&&m.wrist && phases.length){
+   const imp=phases.find(ph=>ph.name==='impact');
+   if(imp && i>=imp.idx){
+     const wx=m.wx, wy=m.wy;
+     if(wx!=null&&wy!=null){
+       const s=stats();
+       const pathAngle=s.clubPath||0;
+       const len=0.3;
+       const rad=pathAngle*Math.PI/180;
+       ctx.strokeStyle='rgba(255,255,0,0.9)'; ctx.lineWidth=3;
+       ctx.beginPath(); ctx.moveTo(wx*W, wy*H);
+       ctx.lineTo((wx + Math.cos(rad)*len)*W, (wy + Math.sin(rad)*len)*H); ctx.stroke();
+       // fade/draw label
+       ctx.fillStyle='yellow'; ctx.font='12px Inter'; ctx.fillText((pathAngle>5?'Draw':'Fade')+' '+Math.abs(pathAngle).toFixed(1)+'°', (wx+0.02)*W, (wy-0.02)*H);
+     }
+   }
+ }
+ // pro ghost ideal
+ if($('#ghostmode').value!=='off' && m){
+   const cfg=SHOT_CFG[$('#shot').value];
+   const phase=phases.reduce((best,ph)=>{ const d=Math.abs(ph.idx-i); return (!best||d<Math.abs(best.idx-i))?ph:best; }, null);
+   if(phase){
+     // ideal ghost: draw ideal shoulder/hip angles as faint skeleton
+     ctx.strokeStyle='rgba(255,255,255,0.25)'; ctx.lineWidth=2; ctx.setLineDash([3,3]);
+     // simple ghost: shoulder line at ideal turn
+     const idealShoulderTurn=cfg.shoulder * (phase.name==='top'?1: phase.name==='address'?0: phase.name==='impact'?0.2:0.5);
+     // draw ghost shoulder line rotated
+     const ms=m.ms;
+     if(ms){
+       const len=0.15;
+       const ang=idealShoulderTurn*Math.PI/180;
+       ctx.beginPath(); ctx.moveTo((ms[0]-Math.cos(ang)*len)*W, (ms[1]-Math.sin(ang)*len*0.3)*H); ctx.lineTo((ms[0]+Math.cos(ang)*len)*W, (ms[1]+Math.sin(ang)*len*0.3)*H); ctx.stroke();
+     }
+     ctx.setLineDash([]);
+   }
+ }
+}
+
+function paint(){
+ if(!F.length) return;
+ const i=Math.round(v.currentTime*FPS);
+ if(i<0||i>=F.length) return;
+ const ovCanvas=$('#ov'); const skCanvas=$('#sk');
+ if(ovCanvas.width!==v.videoWidth) {ovCanvas.width=v.videoWidth; ovCanvas.height=v.videoHeight;}
+ if(skCanvas.width!==v.videoWidth) {skCanvas.width=v.videoWidth; skCanvas.height=v.videoHeight;}
+ draw(ovCanvas, i, true);
+ draw(skCanvas, i, false);
+ const m=M[i];
+ if(m){
+   $('#ang').textContent=`Spine ${m.spine?m.spine.toFixed(0)+'°':''} | Knee ${(m.kl&&m.kr)?((m.kl+m.kr)/2).toFixed(0)+'°':''} | Shoulder ${m.sh!=null?m.sh.toFixed(0)+'°':''} | Hip ${m.hipA!=null?m.hipA.toFixed(0)+'°':''} | X ${m.sh!=null&&m.hipA!=null?(Math.abs(m.sh-m.hipA)).toFixed(0)+'°':''} | Weight ${m.ws!=null?m.ws.toFixed(2):''} | Ball ${m.ballPos!=null?m.ballPos.toFixed(2):''} | Path ${stats().clubPath!=null?stats().clubPath.toFixed(1)+'°':''}`;
+   // pressure mat
+   if(m.ws!=null){
+     const leadPct = 0.5 + m.ws; // approximate
+     const leadH = Math.max(5, Math.min(95, leadPct*100));
+     const trailH = 100-leadH;
+     const fl=document.getElementById('fillLead'), ft=document.getElementById('fillTrail');
+     if(fl) fl.style.height=leadH+'%';
+     if(ft) ft.style.height=trailH+'%';
+   }
+ }
+ $('#tm').textContent=(F[i].t).toFixed(2)+'s';
+}
+
+function report(){
+ const out=$('#out'); out.innerHTML='';
+ const s=snap();
+ const cfg=SHOT_CFG[s.shot]||SHOT_CFG.midiron;
+ const title=el('h2',null,out,'');
+ title.innerHTML=`Pro-style: <b>${s.pro.toFixed(1)} /10</b> – ${cfg.name} (${s.view}) – ${s.hand}`;
+ const measures=el('div',null,out,'row2');
+ measures.innerHTML=`<span class="pill">Spine ${s.stats.spine?s.stats.spine.toFixed(0)+'°':''} ideal ${cfg.spine}°</span>
+ <span class="pill">Knee ${s.stats.knee?s.stats.knee.toFixed(0)+'°':''} ideal ${cfg.knee}°</span>
+ <span class="pill">Shoulder ${s.stats.shoulderTurn?s.stats.shoulderTurn.toFixed(0)+'°':''} ideal ${cfg.shoulder}°</span>
+ <span class="pill">Hip ${s.stats.hipTurn?s.stats.hipTurn.toFixed(0)+'°':''} ideal ${cfg.hip}°</span>
+ <span class="pill">X ${s.stats.xFactor?s.stats.xFactor.toFixed(0)+'°':''} ideal ${cfg.xFactor}°</span>
+ <span class="pill">Stance ${s.stats.stance?s.stats.stance.toFixed(2):''} ideal ${cfg.stance}</span>
+ <span class="pill">Weight ${s.stats.weightShiftRange!=null?s.stats.weightShiftRange.toFixed(2):''}</span>
+ <span class="pill">Tempo ${s.stats.tempo?s.stats.tempo.ratio.toFixed(1)+':1 ideal '+cfg.tempo+':1':''}</span>
+ <span class="pill">Ball ${s.stats.ballPos!=null?s.stats.ballPos.toFixed(2)+' ideal '+cfg.ballPos:''}</span>
+ <span class="pill">Path ${s.stats.clubPath!=null?s.stats.clubPath.toFixed(1)+'°':''}</span>
+ <span class="pill">Head ${s.stats.headMove!=null?s.stats.headMove.toFixed(2):''}</span>`;
+
+ const good=s.findings.filter(f=>f.good);
+ if(good.length){
+   const h=el('h3','What is working',out);
+   good.forEach(f=>{
+     const c=el('div',null,out,'card');
+     c.innerHTML=`<b>✅ ${f.title}</b><br><span class="note">${f.why}</span>`;
+   });
+ }
+ const bad=s.findings.filter(f=>!f.good).sort((a,b)=>b.sev-a.sev);
+ if(bad.length){
+   const h=el('h3',`Top ${Math.min(3,bad.length)} improvements – Usefulness`,out);
+   bad.slice(0,3).forEach(f=>{
+     const c=el('div',null,out,'card');
+     c.innerHTML=`<b>${f.sev===2?'🔴':'🟡'} ${f.title}</b><br><span class="note">${f.why}</span>${f.drill?`<br><br><b>Drill:</b> <span class="note">${f.drill}</span>`:''}${f.tips?`<br><b>Tips:</b> <span class="note">${f.tips.join(' • ')}</span>`:''}`;
+   });
+ }
+ const plan=el('div',null,out,'card');
+ plan.innerHTML=`<h3>Your practice plan (${cfg.name}) – Enjoyment</h3>
+ <ul>
+ <li>Warm-up: 10 shoulder rotations, 10 hip rotations, 10 slow rehearsal swings.</li>
+ ${bad.slice(0,3).map(f=>`<li><b>${f.title}:</b> ${f.drill||f.tips[0]} – 3 sets of 10, 30s rest.</li>`).join('')}
+ <li>Alignment sticks drill: lay sticks for target line & ball position (${cfg.ballPos} ideal), 5 reps.</li>
+ <li>Metronome: 3 beeps back, 1 down for ${cfg.name} – 5 reps with audio.</li>
+ <li>Film again same view (${s.view}) and compare scores. Track progress.</li>
+ </ul>
+ <p class="note">Club recommendation: ${(() => {
+   if(bad.some(b=>b.title.includes('Spine'))) return 'Check posture – may need more flexible shaft or check ball position.';
+   if(bad.some(b=>b.title.includes('Weight'))) return 'Weight shift issue – practice pressure mat, may need lessons.';
+   if(bad.some(b=>b.title.includes('Tempo'))) return 'Tempo – use metronome, smoother rhythm helps consistency.';
+   return 'Good base – work on gapping and course management.';
+ })()}</p>`;
+
+ if(phases.length){
+   const phDiv=el('div',null,out,'card');
+   phDiv.innerHTML=`<h3>Swing phases (${phases.length})</h3>`+phases.map(p=>`<span class="pill">${p.label} @ ${F[p.idx]?F[p.idx].t.toFixed(2)+'s':''}</span>`).join(' ');
+ }
+ if(s.stats.tempo){
+   const tDiv=el('div',null,out,'card');
+   tDiv.innerHTML=`<h3>Tempo & Gapping – Usefulness</h3><span class="note">Back ${s.stats.tempo.back.toFixed(2)}s, Down ${s.stats.tempo.down.toFixed(2)}s, Ratio ${s.stats.tempo.ratio.toFixed(1)}:1 (ideal ${cfg.tempo}:1). Estimated carry: ${(() => {
+     const base={driver:240, wood:200, hybrid:180, longiron:170, midiron:150, shortiron:130, pw:110, gw:90, sw:80, lw:60, pitch:40, chip:15, bunker:70, putt:0}[s.shot]||150;
+     const factor=(s.stats.shoulderTurn||70)/75 * (3/(s.stats.tempo?.ratio||3));
+     return Math.round(base*factor)+'y (calibrate with real)';
+   })()}</span>`;
+ }
+}
+
+let busy=false;
+async function analyse(file){
+ if(busy) return;
+ busy=true;
+ $('#err').hidden=true;
+ $('#prog').hidden=false; $('#prog').value=0;
+ say('Loading video...');
+ F=[]; S=[]; M=[]; phases=[];
+ const url=URL.createObjectURL(file);
+ v.src=url;
+ await new Promise((ok,rej)=>{v.onloadedmetadata=()=>ok(); v.onerror=()=>rej(new Error('Video load failed'));});
+ ar=v.videoWidth/v.videoHeight;
+ ov.width=v.videoWidth; ov.height=v.videoHeight;
+ sk.width=v.videoWidth; sk.height=v.videoHeight;
+ const kind=document.querySelector('#speed [aria-pressed="true"]')?.dataset.k||'lite';
+ say('Loading pose model ('+kind+')...');
+ let landmarker;
+ try{ landmarker=await model(kind); }catch(e){ $('#err').hidden=false; $('#err').textContent='Could not load pose model: '+e.message; busy=false; $('#prog').hidden=true; return; }
+ const dur=v.duration;
+ FPS = dur>20? 8 : (document.querySelector('#speed [aria-pressed="true"]')?.dataset.k==='full'?15:12);
+ const total=Math.ceil(dur*FPS);
+ say('Analysing '+total+' frames...');
+ const run=()=>{
+   const result=landmarker.detectForVideo(v, performance.now());
+   if(!result.landmarks||!result.landmarks.length) return null;
+   let best=null, bestScore=-1;
+   result.landmarks.forEach(lm=>{
+     const score=lm.reduce((s,pt)=>s+ (pt.visibility||0),0);
+     if(score>bestScore){bestScore=score; best=lm;}
+   });
+   if(!best) return null;
+   const p=IDX.map(idx=>{ const pt=best[idx]; if(!pt) return null; return [pt.x, pt.y, pt.visibility||1]; });
+   return p;
+ };
+ const ok = await playPass(total-1, run, $('#prog'));
+ if(!ok){ $('#err').hidden=false; $('#err').textContent='Analysis interrupted. Try shorter clip.'; busy=false; $('#prog').hidden=true; return; }
+ S=F.map(f=>f&&f.P?f.P:null);
+ series();
+ const s=stats();
+ say('Done – '+F.length+' frames, top @ '+(phases.find(p=>p.name==='top')?F[phases.find(p=>p.name==='top').idx].t.toFixed(2)+'s':'')+' – '+SHOT_CFG[$('#shot').value].name);
+ report();
+ paint();
+ checkAchievements(s);
+ drawProgressChart();
+ drawGappingChart();
+ const tl=$('#tl'); tl.innerHTML='';
+ phases.forEach(p=>{ const i=document.createElement('i'); i.style.left=(p.idx/F.length*100)+'%'; i.style.width='4px'; i.title=p.label; tl.appendChild(i); });
+ busy=false; $('#prog').hidden=true;
+}
+
+// --- Robust drop video handling – fixed ---
+(function(){
+ const dz = document.getElementById('drop');
+ const fileInput = document.getElementById('vf');
+ if(!dz || !fileInput) return;
+ function handleFile(file){
+   if(!file) return;
+   if(!file.type.startsWith('video/') && !file.name.match(/\.(mp4|mov|webm|m4v|avi|mkv)$/i)){
+     say('That file does not look like a video – try MP4, MOV or WebM.');
+     return;
+   }
+   analyse(file);
+ }
+ fileInput.addEventListener('change', e=>{
+   const f = e.target.files && e.target.files[0];
+   if(f) handleFile(f);
+   // reset so same file can be selected again
+   e.target.value='';
+ });
+ dz.addEventListener('click', e=>{
+   if(e.target.closest('button') || e.target.closest('input') || e.target.closest('a') || e.target.closest('select')) return;
+   fileInput.click();
+ });
+ dz.addEventListener('keydown', e=>{
+   if(e.key==='Enter' || e.key===' '){
+     e.preventDefault();
+     fileInput.click();
+   }
+ });
+ ['dragenter','dragover'].forEach(ev=>{
+   dz.addEventListener(ev, e=>{
+     e.preventDefault(); e.stopPropagation();
+     dz.classList.add('over');
+   });
+ });
+ ['dragleave','dragend'].forEach(ev=>{
+   dz.addEventListener(ev, e=>{
+     e.preventDefault(); e.stopPropagation();
+     dz.classList.remove('over');
+   });
+ });
+ dz.addEventListener('drop', e=>{
+   e.preventDefault(); e.stopPropagation();
+   dz.classList.remove('over');
+   let file = null;
+   if(e.dataTransfer.files && e.dataTransfer.files.length) file = e.dataTransfer.files[0];
+   else if(e.dataTransfer.items && e.dataTransfer.items.length){
+     for(let i=0;i<e.dataTransfer.items.length;i++){
+       const it = e.dataTransfer.items[i];
+       if(it.kind==='file'){
+         file = it.getAsFile();
+         if(file) break;
+       }
+     }
+   }
+   if(file) handleFile(file);
+ });
+ // Prevent browser from opening file when dropped outside
+ document.addEventListener('dragover', e=>e.preventDefault());
+ document.addEventListener('drop', e=>e.preventDefault());
+})();
+$('#play').onclick=()=>{ if(v.paused){v.play(); $('#play').textContent='Pause';} else {v.pause(); $('#play').textContent='Play';}};
+$('#slow05').onclick=()=>{ v.playbackRate=0.5; v.play(); };
+$('#slow025').onclick=()=>{ v.playbackRate=0.25; v.play(); };
+$('#norm1').onclick=()=>{ v.playbackRate=1; v.play(); };
+$('#fast2').onclick=()=>{ v.playbackRate=2; v.play(); };
+v.addEventListener('timeupdate', paint);
+v.addEventListener('seeked', paint);
+$('#scr').oninput=e=>{ const t=e.target.value/1000*v.duration; v.currentTime=t; };
+$('#phaseJump').onchange=e=>{
+ const name=e.target.value; if(!name) return;
+ const p=phases.find(ph=>ph.name===name);
+ if(p&&F[p.idx]) v.currentTime=F[p.idx].t;
+};
+$('#shot').onchange=()=>{ if(F.length) report(); };
+$('#viewAng').onchange=()=>{ if(F.length) report(); };
+$('#hand').onchange=()=>{ if(F.length) report(); };
+$('#level').onchange=()=>{ if(F.length) report(); };
+$('#ghostmode').onchange=()=>paint();
+$('#tracer').onchange=()=>paint();
+$('#sticks').onchange=()=>paint();
+$('#pressure').onchange=()=>paint();
+$('#speed').onclick=e=>{
+ const b=e.target.closest('button'); if(!b) return;
+ [...$('#speed').children].forEach(x=>x.setAttribute('aria-pressed','false')); b.setAttribute('aria-pressed','true');
+};
+
+function setMode(m){
+ if(m==='upload'){ $('#mode-upload').hidden=false; $('#mode-bag').hidden=true; $('#mode-live').hidden=true; $('#tabU').setAttribute('aria-selected','true'); $('#tabB').setAttribute('aria-selected','false'); $('#tabL').setAttribute('aria-selected','false');}
+ else if(m==='bag'){ $('#mode-upload').hidden=true; $('#mode-bag').hidden=false; $('#mode-live').hidden=true; $('#tabU').setAttribute('aria-selected','false'); $('#tabB').setAttribute('aria-selected','true'); $('#tabL').setAttribute('aria-selected','false'); updateBag(); drawGappingChart();}
+ else if(m==='live'){ $('#mode-upload').hidden=true; $('#mode-bag').hidden=true; $('#mode-live').hidden=false; $('#tabU').setAttribute('aria-selected','false'); $('#tabB').setAttribute('aria-selected','false'); $('#tabL').setAttribute('aria-selected','true');}
+}
+$('#tabU').onclick=()=>setMode('upload');
+$('#tabB').onclick=()=>setMode('bag');
+$('#tabL').onclick=()=>setMode('live');
+
+try{const t=localStorage.getItem('pu-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
+$('#theme').onclick=()=>{const dark=document.documentElement.dataset.theme?document.documentElement.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;document.documentElement.dataset.theme=dark?'light':'dark';try{localStorage.setItem('pu-theme',document.documentElement.dataset.theme)}catch(e){}};
+(function(){
+  const fmtEl=document.getElementById('fmt');
+  if(!fmtEl) return;
+  function applyFormat(fmt){
+    document.body.classList.remove('format-desktop','format-phone');
+    if(fmt==='desktop') document.body.classList.add('format-desktop');
+    else if(fmt==='phone') document.body.classList.add('format-phone');
+    [...fmtEl.children].forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.fmt===fmt)));
+    try{localStorage.setItem('pu-format', fmt);}catch(e){}
+  }
+  fmtEl.onclick=e=>{ const b=e.target.closest('button'); if(!b) return; applyFormat(b.dataset.fmt); };
+  try{ const saved=localStorage.getItem('pu-format'); if(saved && ['auto','desktop','phone'].includes(saved)) applyFormat(saved); else applyFormat('auto'); }catch(e){ applyFormat('auto'); }
+})();
+
+(function(){
+  const btnManual=document.getElementById('btnManual');
+  const btnHelp=document.getElementById('btnHelp');
+  const btnGithub=document.getElementById('btnGithub');
+  const btnInstall=document.getElementById('btnInstall');
+  const helpModal=document.getElementById('helpModal');
+  const closeHelp=document.getElementById('closeHelp');
+  const drillsModal=document.getElementById('drillsModal');
+  const achModal=document.getElementById('achModal');
+  const compareModal=document.getElementById('compareModal');
+  if(btnManual){
+    btnManual.onclick=()=>{
+      fetch('Golf-Coach-Manual.pdf').then(r=>{
+        if(r.ok) return r.blob().then(blob=>{
+          const url=URL.createObjectURL(blob);
+          const a=document.createElement('a'); a.href=url; a.download='Golf-Coach-Manual.pdf'; document.body.appendChild(a); a.click();
+          setTimeout(()=>{URL.revokeObjectURL(url); a.remove();},1000);
+        });
+        else throw 0;
+      }).catch(()=>{ window.open('Golf-Coach-Manual.pdf','_blank'); });
+    };
+  }
+  function openHelp(){ if(helpModal) helpModal.hidden=false; }
+  function closeHelpFn(){ if(helpModal) helpModal.hidden=true; }
+  if(btnHelp) btnHelp.onclick=openHelp;
+  if(closeHelp) closeHelp.onclick=closeHelpFn;
+  if(helpModal) helpModal.onclick=(e)=>{ if(e.target===helpModal) closeHelpFn(); };
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && helpModal && !helpModal.hidden) closeHelpFn(); });
+  if(btnGithub){ btnGithub.onclick=()=>{ alert('To publish Golf Coach to GitHub Pages:\n1. Create repo golf-coach\n2. Upload index.html, manifest.json, sw.js, icons, manual\n3. Settings > Pages > main / (root)'); }; }
+  let deferredPrompt=null;
+  window.addEventListener('beforeinstallprompt', e=>{e.preventDefault(); deferredPrompt=e; if(btnInstall) btnInstall.hidden=false;});
+  if(btnInstall){ btnInstall.onclick=async()=>{ if(deferredPrompt){ deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt=null; btnInstall.hidden=true; } else alert('To install:\nDesktop: address bar Install icon\nAndroid: menu > Install app\niPhone: Share > Add to Home Screen'); }; }
+  if('serviceWorker' in navigator){ window.addEventListener('load', ()=>{ navigator.serviceWorker.register('./sw.js').catch(()=>{}); }); }
+
+  // drills
+  const DRILLS=[
+    {title:'Alignment Sticks – Target Line', when:'Club path off, ball position off', how:'Lay two sticks on ground parallel to target line, feet on one, ball on other. 10 reps per shot.', tags:['alignment','ball']},
+    {title:'Ball Position Ladder', when:'Ball position inconsistent', how:'Place 5 balls from center to lead heel, hit each, feel difference. 3 sets.', tags:['ball','gapping']},
+    {title:'Tempo Metronome 3:1', when:'Tempo off, rushing', how:'Set metronome 3 beeps back, 1 beep down for driver, 1:1 for putt. 10 reps.', tags:['tempo']},
+    {title:'Pressure Mat – Shift Drill', when:'Weight shift low', how:'Feel pressure move trail to lead, lead foot 80% at impact driver. Use mat visual.', tags:['weight','pressure']},
+    {title:'Pro Ghost Race', when:'Shoulder turn low', how:'Enable ideal ghost, try match ghost at top, 10 reps slow.', tags:['turn','ghost']},
+    {title:'Tracer Gate', when:'Slice/hook, path', how:'Place two tees gate 1 inch wider than clubhead, swing through gate, check tracer fade/draw.', tags:['path','tracer']},
+    {title:'Head Stable – Headcover', when:'Head moving', how:'Headcover under chin, keep still through impact, 10 reps.', tags:['head']},
+    {title:'X-Factor Stretch', when:'X-factor low', how:'Hold hips, turn shoulders more at top, hold 2s, 10x.', tags:['x-factor']},
+    {title:'Gapping – Calibrate Distances', when:'Distance gaps unknown', how:'Hit 5 balls per club, estimate carry from rotation, log in app, compare to real.', tags:['gapping']},
+    {title:'Daily Challenge – 3 Ideal Tempos', when:'Motivation', how:'Hit ideal tempo 3x in a row for selected shot, earn badge.', tags:['fun','challenge']},
+  ];
+  function renderDrills(filter){
+    const list=document.getElementById('drillsList'); if(!list) return; list.innerHTML='';
+    const toShow=filter?DRILLS.filter(d=>d.tags.includes(filter)):DRILLS;
+    toShow.forEach(d=>{ const div=document.createElement('div'); div.className='card'; div.innerHTML=`<b>${d.title}</b><br><span class="note">When: ${d.when}</span><br><span class="note">How: ${d.how}</span><br><span class="pill">${d.tags.join(', ')}</span>`; list.appendChild(div); });
+  }
+  document.getElementById('btnDrills').onclick=()=>{ renderDrills(); drillsModal.hidden=false; };
+  document.getElementById('closeDrills').onclick=()=>{ drillsModal.hidden=true; };
+  drillsModal.onclick=e=>{ if(e.target===drillsModal) drillsModal.hidden=true; };
+
+  // achievements
+  function checkAchievements(snap){
+    const ach=JSON.parse(localStorage.getItem('golf-ach')||'{}');
+    const sessions=JSON.parse(localStorage.getItem('golf-sessions')||'[]');
+    let updated=false;
+    if(sessions.length>=1 && !ach.first){ ach.first=true; updated=true; }
+    if(sessions.length>=10 && !ach.ten){ ach.ten=true; updated=true; }
+    if(snap && snap.pro>=8 && !ach.eight){ ach.eight=true; updated=true; }
+    if(snap && snap.stats.tempo && Math.abs(snap.stats.tempo.ratio - snap.stats.cfg.tempo)<0.3 && !ach.tempo){ ach.tempo=true; updated=true; }
+    if(snap && snap.stats.shoulderTurn>=85 && !ach.turn){ ach.turn=true; updated=true; }
+    if(sessions.length>=3 && !ach.streak){ ach.streak=true; updated=true; }
+    if(snap && snap.stats.ballPos!=null && Math.abs(snap.stats.ballPos - snap.stats.cfg.ballPos)<0.08 && !ach.ball){ ach.ball=true; updated=true; }
+    if(updated){ localStorage.setItem('golf-ach', JSON.stringify(ach)); renderAch(); }
+  }
+  window.checkAchievements=checkAchievements;
+  function renderAch(){
+    const list=document.getElementById('achList'); if(!list) return;
+    const ach=JSON.parse(localStorage.getItem('golf-ach')||'{}');
+    const badges=[
+      {id:'first', name:'First Swing', desc:'Analyze first swing', icon:'⛳', earned:!!ach.first},
+      {id:'ten', name:'10 Sessions', desc:'Save 10 sessions', icon:'🔟', earned:!!ach.ten},
+      {id:'eight', name:'8/10 Pro', desc:'Score 8/10', icon:'⭐', earned:!!ach.eight},
+      {id:'tempo', name:'Tempo Master', desc:'Hit ideal tempo', icon:'🥁', earned:!!ach.tempo},
+      {id:'turn', name:'Full Turn', desc:'Shoulder 85°+', icon:'🔄', earned:!!ach.turn},
+      {id:'ball', name:'Ball Position Pro', desc:'Ideal ball position', icon:'🎯', earned:!!ach.ball},
+      {id:'streak', name:'Streak 3', desc:'3 days', icon:'🔥', earned:!!ach.streak},
+    ];
+    list.innerHTML='';
+    badges.forEach(b=>{ const div=document.createElement('div'); div.className='badge '+(b.earned?'gold':''); div.innerHTML=`${b.icon} <b>${b.name}</b> – ${b.desc} ${b.earned?'✅':''}`; list.appendChild(div); });
+  }
+  window.renderAch=renderAch;
+  document.getElementById('btnAch').onclick=()=>{ renderAch(); achModal.hidden=false; };
+  document.getElementById('closeAch').onclick=()=>{ achModal.hidden=true; };
+  achModal.onclick=e=>{ if(e.target===achModal) achModal.hidden=true; };
+
+  // compare
+  document.getElementById('btnCompare').onclick=()=>{
+    compareModal.hidden=false;
+    document.getElementById('compareOut').innerHTML='<p class="note">Side-by-Side: load second video for comparison. Before/After: save current as before, then analyze after.</p><button id="beforeAfter" class="ghost">Before/After – Save Before</button><button id="loadSecond" class="ghost">Load Second Video (Compare)</button>';
+    document.getElementById('beforeAfter').onclick=()=>{
+      if(!F.length){ alert('Analyze first'); return; }
+      if(!window.beforeGolf){ window.beforeGolf=snap(); localStorage.setItem('golf-before', JSON.stringify(window.beforeGolf)); alert('Saved as BEFORE. Now analyze AFTER.'); document.getElementById('beforeAfter').textContent='Before/After – Show Improvement'; }
+      else { const after=snap(); const before=window.beforeGolf; const diff=after.pro-before.pro; alert(`Before: ${before.pro.toFixed(1)}/10 – Shoulder ${before.stats.shoulderTurn?.toFixed(0)}° – Tempo ${before.stats.tempo?.ratio.toFixed(1)}:1\nAfter: ${after.pro.toFixed(1)}/10 – Shoulder ${after.stats.shoulderTurn?.toFixed(0)}° – Tempo ${after.stats.tempo?.ratio.toFixed(1)}:1\nImprovement: ${diff>0?'+':''}${diff.toFixed(1)}`); window.beforeGolf=null; }
+    };
+    document.getElementById('loadSecond').onclick=()=>{ alert('To compare: open second Golf Coach window side-by-side, or use screen split. Future version will load second video in same canvas.'); };
+  };
+  document.getElementById('closeCompare').onclick=()=>{ compareModal.hidden=true; };
+  compareModal.onclick=e=>{ if(e.target===compareModal) compareModal.hidden=true; };
+
+  // metronome
+  let metroOn=false, metroCtx=null, metroInterval=null;
+  document.getElementById('btnMetronome').onclick=()=>{
+    const btn=document.getElementById('btnMetronome');
+    const cfg=SHOT_CFG[$('#shot').value]||SHOT_CFG.midiron;
+    if(!metroOn){
+      metroCtx=new (window.AudioContext||window.webkitAudioContext)();
+      const tempo=cfg.tempo;
+      const beat=60000/90; // 90bpm base
+      let count=0;
+      metroInterval=setInterval(()=>{
+        const osc=metroCtx.createOscillator(); const gain=metroCtx.createGain();
+        osc.type='sine'; osc.frequency.value= count% (tempo+1)===0 ? 880 : 440;
+        osc.connect(gain); gain.connect(metroCtx.destination);
+        gain.gain.setValueAtTime(0.3, metroCtx.currentTime);
+        osc.start(); osc.stop(metroCtx.currentTime+0.1);
+        count=(count+1)%(tempo+1);
+      }, beat);
+      metroOn=true; btn.textContent='🥁 Metronome off'; btn.style.background='var(--accent)'; btn.style.color='var(--accent-ink)';
+    } else {
+      clearInterval(metroInterval); if(metroCtx) metroCtx.close(); metroOn=false; btn.textContent='🥁 Metronome'; btn.style.background=''; btn.style.color='';
+    }
+  };
+  document.getElementById('lMetronome').onclick=()=>{ document.getElementById('btnMetronome').click(); };
+
+  // export video
+  document.getElementById('btnExport').onclick=async()=>{
+    if(!F.length){ alert('Analyze first'); return; }
+    const canvas=document.getElementById('sk');
+    const stream=canvas.captureStream(30);
+    const rec=new MediaRecorder(stream, {mimeType:'video/webm;codecs=vp9'});
+    const chunks=[];
+    rec.ondataavailable=e=>{ if(e.data.size>0) chunks.push(e.data); };
+    rec.onstop=()=>{
+      const blob=new Blob(chunks, {type:'video/webm'});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a'); a.href=url; a.download='golf-coach-skeleton-'+($('#sname').value.trim()||'golfer')+'-'+SHOT_CFG[$('#shot').value].name+'.webm'; a.click();
+      setTimeout(()=>URL.revokeObjectURL(url),1000);
+    };
+    rec.start();
+    v.currentTime=0; v.play();
+    setTimeout(()=>{ rec.stop(); v.pause(); alert('Video with skeleton + ghost + tracer + sticks saved! Share with coach.'); }, Math.min(15000, v.duration*1000));
+  };
+
+  // progress charts
+  window.drawProgressChart=()=>{
+    const c=document.getElementById('progressChart');
+    if(!c) return;
+    const ctx=c.getContext('2d'); const W=c.width=c.clientWidth*2, H=c.height=220*2;
+    ctx.clearRect(0,0,W,H);
+    const sessions=JSON.parse(localStorage.getItem('golf-sessions')||'[]');
+    if(sessions.length<2){ ctx.fillStyle='#9ab0a0'; ctx.font='14px Inter'; ctx.fillText('Need 2+ sessions for progress – shoulder turn, tempo, X-factor over time', 12, 20); return; }
+    const shoulder=sessions.map(s=>s.stats?.shoulderTurn||70);
+    const tempo=sessions.map(s=>s.stats?.tempo?.ratio||3);
+    const xfac=sessions.map(s=>s.stats?.xFactor||30);
+    const drawLine=(arr, color, yBase, yScale, max)=>{
+      ctx.strokeStyle=color; ctx.lineWidth=2; ctx.beginPath();
+      arr.forEach((v,i)=>{ const x=W*0.12 + (W*0.83)*i/Math.max(1,arr.length-1); const y=yBase + yScale*(1 - Math.min(v,max)/max); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); });
+      ctx.stroke();
+    };
+    drawLine(shoulder, '#1a7a3a', H*0.05, H*0.25, 100);
+    drawLine(tempo, '#4a90e2', H*0.35, H*0.25, 5);
+    drawLine(xfac, '#ff8c42', H*0.65, H*0.25, 60);
+    ctx.fillStyle='#1a7a3a'; ctx.font='bold 12px Inter'; ctx.fillText('Shoulder turn ° – green', 12, 20);
+    ctx.fillStyle='#4a90e2'; ctx.fillText('Tempo ratio – blue', 12, H*0.35+4);
+    ctx.fillStyle='#ff8c42'; ctx.fillText('X-factor ° – orange', 12, H*0.65+4);
+  };
+  window.drawGappingChart=()=>{
+    const c=document.getElementById('gappingChart');
+    if(!c) return;
+    const ctx=c.getContext('2d'); const W=c.width=c.clientWidth*2, H=c.height=220*2;
+    ctx.clearRect(0,0,W,H);
+    const sessions=JSON.parse(localStorage.getItem('golf-sessions')||'[]');
+    const byShot={};
+    sessions.forEach(s=>{ const shot=s.shot||'Mid Iron'; if(!byShot[shot]) byShot[shot]=[]; byShot[shot].push(s); });
+    const shots=Object.keys(byShot);
+    if(!shots.length){ ctx.fillStyle='#9ab0a0'; ctx.font='14px Inter'; ctx.fillText('Save sessions for different shots to see gapping – estimated carry', 12, 20); return; }
+    const baseCarry={Driver:240, 'Fairway Wood':200, Hybrid:180, 'Long Iron (3-5)':170, 'Mid Iron (6-7)':150, 'Short Iron (8-9)':130, 'Pitching Wedge':110, 'Gap Wedge':90, 'Sand Wedge':80, 'Lob Wedge':60, 'Pitch (30-50y)':40, Chip:15, Bunker:70, Putt:0};
+    let x= W*0.12;
+    const barW= (W*0.8)/Math.max(1,shots.length*1.5);
+    shots.forEach(shot=>{
+      const arr=byShot[shot];
+      const avgShoulder=arr.reduce((a,s)=>a+(s.stats?.shoulderTurn||70),0)/arr.length;
+      const avgTempo=arr.reduce((a,s)=>a+(s.stats?.tempo?.ratio||3),0)/arr.length;
+      const base=baseCarry[shot]||100;
+      const factor=(avgShoulder/75)*(3/avgTempo);
+      const carry=Math.round(base*factor);
+      const h= (carry/300)*H*0.7;
+      ctx.fillStyle='#1a7a3a'; ctx.fillRect(x, H*0.85-h, barW, h);
+      ctx.fillStyle='#121a14'; ctx.font='10px Inter'; ctx.fillText(shot.slice(0,8), x, H*0.9);
+      ctx.fillText(carry+'y', x, H*0.85-h-4);
+      x+=barW*1.3;
+    });
+  };
+})();
+
+function updateBag(){
+ const out=$('#bagOut'); out.innerHTML='';
+ const saved=JSON.parse(localStorage.getItem('golf-sessions')||'[]');
+ if(!saved.length){ out.textContent='No saved sessions yet. Save sessions for driver to putter.'; return; }
+ const byShot={};
+ saved.forEach(s=>{ if(!byShot[s.shot]) byShot[s.shot]=[]; byShot[s.shot].push(s); });
+ Object.keys(byShot).forEach(shot=>{
+   const arr=byShot[shot];
+   const avgPro=arr.reduce((a,s)=>a+(s.pro||0),0)/arr.length;
+   const avgShoulder=arr.reduce((a,s)=>a+(s.stats?.shoulderTurn||0),0)/arr.length;
+   const div=document.createElement('div'); div.className='card';
+   div.innerHTML=`<b>${shot} – ${arr.length} sessions – avg Pro ${avgPro.toFixed(1)}/10 – avg shoulder ${avgShoulder.toFixed(0)}°</b><br><span class="note">Last: ${arr[arr.length-1].date}</span>`;
+   out.appendChild(div);
+ });
+ // daily challenge
+ const daily=document.getElementById('dailyOut');
+ if(daily){
+   const today=new Date().toDateString();
+   const dailyData=JSON.parse(localStorage.getItem('golf-daily')||'{}');
+   const count=dailyData[today]||0;
+   daily.textContent=`Daily Challenge today (${today}): ${count}/3 ideal tempos – ${count>=3?'✅ Completed!':'Keep going'}`;
+ }
+}
+
+$('#saveSess').onclick=()=>{
+ const s=snap();
+ const name=$('#sname').value.trim()||'Golfer';
+ const entry={name, shot:SHOT_CFG[s.shot].name, view:s.view, pro:s.pro, date:new Date().toLocaleString(), stats:s.stats};
+ const saved=JSON.parse(localStorage.getItem('golf-sessions')||'[]');
+ saved.push(entry);
+ localStorage.setItem('golf-sessions', JSON.stringify(saved));
+ // daily challenge
+ const today=new Date().toDateString();
+ const dailyData=JSON.parse(localStorage.getItem('golf-daily')||'{}');
+ if(s.stats.tempo && Math.abs(s.stats.tempo.ratio - s.stats.cfg.tempo)<0.4){
+   dailyData[today]=(dailyData[today]||0)+1;
+   localStorage.setItem('golf-daily', JSON.stringify(dailyData));
+ }
+ alert('Session saved for '+name+' – Pro '+s.pro.toFixed(1)+'/10');
+ updateBag(); drawProgressChart(); drawGappingChart();
+};
+
+$('#xcard').onclick=async()=>{
+ if(!F.length){ alert('Analyze first'); return; }
+ const c=document.createElement('canvas'); c.width=1080; c.height=1350;
+ const ctx=c.getContext('2d');
+ ctx.fillStyle='#0f2e1a'; ctx.fillRect(0,0,c.width,c.height);
+ ctx.fillStyle='#fff'; ctx.font='bold 48px Barlow Condensed'; ctx.fillText('Golf Coach',40,80);
+ ctx.font='28px Inter'; ctx.fillText($('#sname').value||'Golfer',40,130);
+ const s=snap();
+ ctx.fillText(`Pro: ${s.pro.toFixed(1)}/10 – ${SHOT_CFG[s.shot].name} (${s.view})`,40,180);
+ if(phases.length>=5){
+   const ids=[0,2,3,5,7].map(i=>phases[i]?.idx).filter(x=>x!=null);
+   for(let k=0;k<ids.length;k++){
+     const i=ids[k];
+     const tmp=document.createElement('canvas'); tmp.width=ov.width; tmp.height=ov.height;
+     draw(tmp,i,false);
+     ctx.drawImage(tmp, 40+k*200, 220, 180, 240);
+   }
+ }
+ ctx.fillStyle='#fff'; ctx.font='20px Inter';
+ let y=500;
+ s.findings.filter(f=>!f.good).slice(0,3).forEach(f=>{
+   ctx.fillText(`• ${f.title}: ${f.why.slice(0,80)}`,40,y); y+=30;
+ });
+ c.toBlob(blob=>{
+   const url=URL.createObjectURL(blob);
+   const a=document.createElement('a'); a.href=url; a.download='golf-coaching-card.png'; a.click();
+   setTimeout(()=>URL.revokeObjectURL(url),1000);
+ });
+};
+
+$('#xpdf').onclick=async()=>{
+ if(!F.length||!$('#out').children.length){ alert('Analyze first'); return; }
+ // simple PDF with grabs – using canvas toDataURL
+ const W=ov.width,H=ov.height;
+ const ix=phases.length>=5?[0,2,3,5,7].map(i=>phases[i]?.idx):[0, Math.floor(F.length*0.3), Math.floor(F.length*0.6), F.length-1];
+ const grabs=[];
+ for(let k=0;k<ix.length;k++){
+   const i=ix[k]; if(i==null) continue;
+   await seek(F[i].t);
+   const an=document.createElement('canvas'); an.width=W; an.height=H;
+   an.getContext('2d').drawImage(v,0,0,W,H);
+   draw(an,false,i,true);
+   grabs.push(an);
+ }
+ // build simple PDF via canvas
+ alert('PDF with grabs – for full PDF, use browser Print > Save as PDF. Enhanced PDF with images coming – grabs captured: '+grabs.length);
+};
+
+$('#xshare').onclick=async()=>{
+ const s=snap();
+ const txt=`*Golf: ${$('#sname').value||'Golfer'} – ${SHOT_CFG[s.shot].name} (${s.view})*\nPro: ${s.pro.toFixed(1)}/10\n${s.findings.filter(f=>!f.good).slice(0,3).map(f=>`• ${f.title}`).join('\n')}\n_Schmied Research And Development_`;
+ if(navigator.share){ try{ await navigator.share({title:'Golf Report', text:txt}); }catch(e){} }
+ else { await navigator.clipboard.writeText(txt); alert('Copied'); }
+};
+$('#xwa').onclick=()=>{
+ const s=snap();
+ const t=`*Golf: ${$('#sname').value||'Golfer'} – ${SHOT_CFG[s.shot].name} (${s.view})*\nPro: ${s.pro.toFixed(1)}/10\n_Schmied Research And Development_`;
+ window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
+};
+
+$('#dailyChallenge').onclick=()=>{
+ const today=new Date().toDateString();
+ const dailyData=JSON.parse(localStorage.getItem('golf-daily')||'{}');
+ const count=dailyData[today]||0;
+ alert(`Daily Challenge – Hit ideal tempo 3x today\nToday: ${count}/3\nShot: ${SHOT_CFG[$('#shot').value].name} ideal tempo ${SHOT_CFG[$('#shot').value].tempo}:1\nUse metronome 🥁`);
+};
+
+
+// ---------- DOWNLOAD ALL VIDEOS IN MP4 AND WEBM – NEW ----------
+let originalFileRef=null;
+(function(){
+ const fileInput=document.getElementById('file');
+ if(fileInput){
+   const origHandler=fileInput.onchange;
+   fileInput.addEventListener('change', e=>{
+     if(e.target.files && e.target.files[0]) originalFileRef=e.target.files[0];
+   });
+ }
+})();
+
+function downloadOriginalMp4(){
+ if(originalFileRef){
+   const url=URL.createObjectURL(originalFileRef);
+   const a=document.createElement('a'); a.href=url; a.download=originalFileRef.name || 'golf-original.mp4'; document.body.appendChild(a); a.click();
+   setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); },1000);
+   say('Original video downloaded as MP4 – '+ (originalFileRef.name||'golf-original.mp4'));
+ } else {
+   const v=document.getElementById('vid');
+   if(v && v.src){
+     const a=document.createElement('a'); a.href=v.src; a.download='golf-original.mp4'; document.body.appendChild(a); a.click(); a.remove();
+     say('Original video downloaded');
+   } else { alert('Load a video first to download original MP4'); }
+ }
+}
+
+function downloadSkeletonVideo(format){
+ const canvas=document.getElementById('sk')||document.getElementById('ov');
+ if(!canvas){ alert('Skeleton canvas not found – analyze first'); return; }
+ const fmt=format||'webm';
+ let mime='video/webm;codecs=vp9';
+ if(fmt==='mp4'){
+   if(MediaRecorder.isTypeSupported('video/mp4;codecs=avc1')) mime='video/mp4;codecs=avc1';
+   else if(MediaRecorder.isTypeSupported('video/mp4')) mime='video/mp4';
+   else if(MediaRecorder.isTypeSupported('video/webm;codecs=h264')) mime='video/webm;codecs=h264';
+ }
+ if(!MediaRecorder.isTypeSupported(mime)){ mime='video/webm;codecs=vp9'; }
+ const stream=canvas.captureStream(30);
+ const rec=new MediaRecorder(stream, {mimeType:mime});
+ const chunks=[];
+ rec.ondataavailable=e=>{ if(e.data.size>0) chunks.push(e.data); };
+ rec.onstop=()=>{
+   const blob=new Blob(chunks, {type:mime});
+   const url=URL.createObjectURL(blob);
+   const a=document.createElement('a'); a.href=url; a.download=`golf-coach-skeleton-${(document.getElementById('sname')?.value.trim()||'golfer')}-${new Date().toISOString().slice(0,10)}.${fmt}`; document.body.appendChild(a); a.click();
+   setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); },1000);
+   say(`Skeleton video saved as ${fmt.toUpperCase()} – ${mime}`);
+ };
+ rec.start();
+ const v=document.getElementById('vid');
+ if(v){
+   const wasPaused=v.paused;
+   const startTime=v.currentTime;
+   v.currentTime=0;
+   v.play();
+   const duration=Math.min(15000, (v.duration||5)*1000);
+   setTimeout(()=>{ rec.stop(); v.pause(); v.currentTime=startTime; if(!wasPaused) v.play(); }, duration);
+   say(`Recording skeleton ${fmt} – ${Math.round(duration/1000)}s`);
+ } else {
+   setTimeout(()=>rec.stop(), 5000);
+ }
+}
+
+function downloadAllVideos(){
+ downloadOriginalMp4();
+ setTimeout(()=>downloadSkeletonVideo('webm'), 1000);
+ setTimeout(()=>downloadSkeletonVideo('mp4'), 3500);
+ // Also download coaching card if exists
+ setTimeout(()=>{
+   const btn=document.getElementById('xcard');
+   if(btn) btn.click();
+ }, 6000);
+ say('Downloading all – original MP4, skeleton WebM, skeleton MP4, card PNG');
+}
+
+// Add buttons to helpbar if not exist
+(function(){
+ const helpbar=document.getElementById('helpbar');
+ if(helpbar && !document.getElementById('btnDlMp4')){
+   const b1=document.createElement('button'); b1.id='btnDlMp4'; b1.className='ghost'; b1.textContent='⬇️ Original .MP4'; b1.title='Download original video as MP4';
+   const b2=document.createElement('button'); b2.id='btnDlWebm'; b2.className='ghost'; b2.textContent='⬇️ Skeleton .WEBM'; b2.title='Download skeleton overlay as WebM';
+   const b3=document.createElement('button'); b3.id='btnDlMp4Skel'; b3.className='ghost'; b3.textContent='⬇️ Skeleton .MP4'; b3.title='Download skeleton as MP4 if supported, else WebM';
+   const b4=document.createElement('button'); b4.id='btnDlAll'; b4.className='ghost'; b4.textContent='⬇️ All Videos'; b4.title='Download original + skeleton WebM + MP4 + card';
+   helpbar.appendChild(b1); helpbar.appendChild(b2); helpbar.appendChild(b3); helpbar.appendChild(b4);
+   b1.onclick=downloadOriginalMp4;
+   b2.onclick=()=>downloadSkeletonVideo('webm');
+   b3.onclick=()=>downloadSkeletonVideo('mp4');
+   b4.onclick=downloadAllVideos;
+ }
+})();
+
+
+// ---------- MORE IMPROVEMENTS FOR GOLFERS – USEFULNESS & ENJOYMENT ----------
+function calculateHandicap(proScore){
+ // pro 10 = 0 handicap, pro 0 = 36 handicap
+ return Math.max(0, Math.min(36, (10-proScore)*3.6)).toFixed(1);
+}
+function drawHandicapChart(){
+ const c=document.getElementById('handicapChart');
+ if(!c) return;
+ const ctx=c.getContext('2d'); const W=c.width=c.clientWidth*2, H=c.height=180*2;
+ ctx.clearRect(0,0,W,H);
+ const sessions=JSON.parse(localStorage.getItem('golf-sessions')||'[]');
+ if(sessions.length<2){ ctx.fillStyle='#9ab0a0'; ctx.font='14px Inter'; ctx.fillText('Save 2+ sessions to see handicap over time – usefulness',12,20); return; }
+ const handicaps=sessions.map(s=>parseFloat(calculateHandicap(s.pro||5)));
+ ctx.strokeStyle='#1a7a3a'; ctx.lineWidth=2; ctx.beginPath();
+ handicaps.forEach((v,i)=>{ const x=W*0.12 + (W*0.83)*i/Math.max(1,handicaps.length-1); const y=H*0.15 + (H*0.7)*(v/36); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); });
+ ctx.stroke();
+ ctx.fillStyle='#1a7a3a'; ctx.font='bold 12px Inter'; ctx.fillText('Handicap over time – lower is better – fun to track improvement',12,20);
+}
+
+// Practice timer Pomodoro 25-5
+let pomodoroTimer=null, pomodoroSec=25*60, pomodoroRunning=false;
+function startPomodoro(){
+ if(pomodoroRunning) return;
+ pomodoroRunning=true;
+ pomodoroTimer=setInterval(()=>{
+   pomodoroSec--;
+   const m=Math.floor(pomodoroSec/60), s=pomodoroSec%60;
+   const el=document.getElementById('pomodoroText');
+   if(el) el.textContent=`Practice: ${m}:${String(s).padStart(2,'0')} – ${pomodoroSec>0?'Keep going':'Break time!'}`;
+   if(pomodoroSec<=0){
+     clearInterval(pomodoroTimer); pomodoroRunning=false;
+     if('speechSynthesis' in window){ const u=new SpeechSynthesisUtterance('Break time – great practice'); speechSynthesis.speak(u); }
+     alert('Pomodoro 25min done – take 5min break – fun streak!');
+     pomodoroSec=25*60;
+   }
+ },1000);
+}
+function stopPomodoro(){
+ if(pomodoroTimer){ clearInterval(pomodoroTimer); pomodoroTimer=null; pomodoroRunning=false; }
+ const el=document.getElementById('pomodoroText');
+ if(el) el.textContent='Pomodoro stopped';
+}
+
+// Voice coaching for golfers
+function speakGolf(text){
+ if('speechSynthesis' in window){
+   const u=new SpeechSynthesisUtterance(text); u.rate=1.05; u.pitch=1; u.volume=0.9;
+   speechSynthesis.cancel(); speechSynthesis.speak(u);
+ }
+}
+function voiceCoachGolf(){
+ const s=snap();
+ if(!s) return;
+ const worst=s.findings.filter(f=>!f.good)[0];
+ if(worst){ speakGolf(worst.title + '. ' + worst.drill.split('.')[0]); }
+ else { speakGolf('Great swing – pro style '+s.pro.toFixed(1)+' out of 10'); }
+}
+
+// Club path numbers
+function updateClubPathNumbers(){
+ const s=snap();
+ if(!s||!s.stats) return;
+ const pathAngle=s.stats.wristPathAngle||0;
+ const el=document.getElementById('clubPathNumbers');
+ if(el) el.textContent=`Club path: ${pathAngle.toFixed(1)}° – ${Math.abs(pathAngle)<3?'Square':pathAngle>0?'In-to-out Draw':'Out-to-in Fade'} – Face: estimate from wrist`;
+}
+
+// Closest to pin challenge – fun
+function closestToPinChallenge(){
+ const target=Math.floor(Math.random()*15)+5; // 5-20y from ideal carry
+ alert(`Closest to Pin Challenge – Try hit ${target}y from your ${document.getElementById('shot')?.value||'Mid Iron'} ideal carry – fun! Measure your gapping chart.`);
+}
+
+// Add UI for these improvements
+(function(){
+ const out=document.getElementById('out');
+ if(out&&!document.getElementById('handicapChart')){
+   const wrap=document.createElement('div'); wrap.className='chartWrap';
+   wrap.innerHTML='<h4>Handicap Tracker – Usefulness & Motivation</h4><canvas id="handicapChart"></canvas><p class="note">Handicap from pro score: 10/10 = 0, 0/10 = 36. Track improvement.</p>';
+   out.parentNode.insertBefore(wrap, out.nextSibling);
+ }
+ const bagOut=document.getElementById('bagOut');
+ if(bagOut&&!document.getElementById('pomodoroText')){
+   const div=document.createElement('div'); div.className='card';
+   div.innerHTML='<b>Pomodoro Practice Timer – Enjoyment</b><br><span class="note" id="pomodoroText">25min work, 5min break – stay focused</span><br><button class="ghost" id="startPomo">Start 25min</button><button class="ghost" id="stopPomo">Stop</button><button class="ghost" id="closestPin">Closest to Pin Challenge</button><button class="ghost" id="voiceCoach">Voice Coach</button><div id="clubPathNumbers" class="note" style="margin-top:8px"></div>';
+   bagOut.parentNode.insertBefore(div, bagOut);
+   setTimeout(()=>{
+     const sBtn=document.getElementById('startPomo'); if(sBtn) sBtn.onclick=startPomodoro;
+     const stBtn=document.getElementById('stopPomo'); if(stBtn) stBtn.onclick=stopPomodoro;
+     const cpBtn=document.getElementById('closestPin'); if(cpBtn) cpBtn.onclick=closestToPinChallenge;
+     const vcBtn=document.getElementById('voiceCoach'); if(vcBtn) vcBtn.onclick=voiceCoachGolf;
+   },500);
+ }
+ // Hook into report to update handicap and club path
+ const origReport2=window.report;
+ if(origReport2){
+   window.report=function(){
+     origReport2();
+     try{ drawHandicapChart(); updateClubPathNumbers(); }catch(e){}
+   };
+ }
+})();
+
+
+// ---------- AUTOMATIC GOLF BALL TRACING – NEW FEATURE ----------
+let BALLS = []; // {x,y,t,frameIdx,conf, vx,vy}
+let ballCanvas = null, ballCtx = null;
+let ballPrevData = null;
+let ballDetectionRunning = false;
+let ballImpactIdx = null;
+let ballLastPos = null;
+let ballVelocity = {x:0, y:-0.02};
+let ballTrailEnabled = true;
+
+function initBallCanvas(){
+ if(!ballCanvas){
+   ballCanvas = document.createElement('canvas');
+   ballCanvas.width = 640;
+   ballCanvas.height = 360;
+   ballCtx = ballCanvas.getContext('2d', {willReadFrequently:true});
+ }
+}
+
+function isWhiteBallPixel(r,g,b, colorMode){
+ if(colorMode==='yellow'){
+   // yellow ball: high R,G, low B, bright
+   return r>180 && g>180 && b<120 && (r+g)/2 - b > 80;
+ }
+ if(colorMode==='white'){
+   const avg = (r+g+b)/3;
+   const mx = Math.max(r,g,b), mn = Math.min(r,g,b);
+   return avg>190 && (mx-mn)<40 && r>180 && g>180 && b>180;
+ }
+ // auto: white or yellow
+ const avg = (r+g+b)/3;
+ const mx = Math.max(r,g,b), mn = Math.min(r,g,b);
+ const isWhite = avg>185 && (mx-mn)<45 && r>175 && g>175 && b>175;
+ const isYellow = r>170 && g>170 && b<130 && (r+g)/2 - b > 60;
+ return isWhite || isYellow;
+}
+
+function findWhiteBlobs(imageData, width, height, roi, prevData, colorMode, sensitivity){
+ const data = imageData.data;
+ const mask = new Uint8Array(width*height);
+ const sensThresh = 11 - sensitivity; // 1..10 -> 10..1, lower more sensitive
+ const whiteThresh = colorMode==='auto'?185:190;
+ const diffThresh = Math.max(15, 35 - sensitivity*2);
+
+ // Build mask of white pixels that moved (if prevData exists)
+ for(let y=roi.y; y<roi.y+roi.h && y<height; y++){
+   for(let x=roi.x; x<roi.x+roi.w && x<width; x++){
+     const idx = (y*width + x)*4;
+     const r=data[idx], g=data[idx+1], b=data[idx+2];
+     if(!isWhiteBallPixel(r,g,b,colorMode)) continue;
+     if(prevData){
+       const pr=prevData[idx], pg=prevData[idx+1], pb=prevData[idx+2];
+       const diff = Math.abs(r-pr)+Math.abs(g-pg)+Math.abs(b-pb);
+       if(diff < diffThresh) continue; // static white, not moving
+     }
+     mask[y*width + x]=1;
+   }
+ }
+
+ const visited = new Uint8Array(width*height);
+ const blobs = [];
+ const stack = [];
+
+ for(let y=roi.y; y<roi.y+roi.h && y<height; y++){
+   for(let x=roi.x; x<roi.x+roi.w && x<width; x++){
+     const p = y*width + x;
+     if(visited[p] || !mask[p]) continue;
+     // flood fill
+     let minX=x, maxX=x, minY=y, maxY=y, area=0, sumX=0, sumY=0;
+     let brightest=0;
+     stack.length=0;
+     stack.push(p);
+     visited[p]=1;
+     while(stack.length){
+       const cur = stack.pop();
+       const cx = cur % width;
+       const cy = Math.floor(cur / width);
+       area++; sumX+=cx; sumY+=cy;
+       if(cx<minX) minX=cx; if(cx>maxX) maxX=cx;
+       if(cy<minY) minY=cy; if(cy>maxY) maxY=cy;
+       const idx = cur*4;
+       const br = (data[idx]+data[idx+1]+data[idx+2])/3;
+       if(br>brightest) brightest=br;
+       // 8-neighbors
+       for(let dy=-1; dy<=1; dy++){
+         for(let dx=-1; dx<=1; dx++){
+           if(dx===0&&dy===0) continue;
+           const nx=cx+dx, ny=cy+dy;
+           if(nx<roi.x||nx>=roi.x+roi.w||ny<roi.y||ny>=roi.y+roi.h||nx<0||nx>=width||ny<0||ny>=height) continue;
+           const np = ny*width + nx;
+           if(visited[np]||!mask[np]) continue;
+           visited[np]=1;
+           stack.push(np);
+         }
+       }
+     }
+     const w = maxX-minX+1, h = maxY-minY+1;
+     const aspect = w/Math.max(1,h);
+     const compact = (w*h)/Math.max(1,area);
+     // Filter by size and shape – golf ball small
+     if(area>=3 && area<=120 && w<=28 && h<=28 && aspect>=0.35 && aspect<=2.8 && compact<6){
+       const cx = sumX/area / width; // normalized 0..1
+       const cy = sumY/area / height;
+       blobs.push({x:cx, y:cy, area, w, h, aspect, brightest, minX, maxX, minY, maxY, centroidX:sumX/area, centroidY:sumY/area});
+     }
+   }
+ }
+ // Sort by brightness and area (ball is bright and small-medium)
+ blobs.sort((a,b)=> (b.brightest*1.5 + b.area) - (a.brightest*1.5 + a.area));
+ return blobs;
+}
+
+function estimateBallStartPos(impactIdx){
+ if(!M[impactIdx] || !F[impactIdx] || !F[impactIdx].P) return {x:0.5, y:0.85};
+ const m = M[impactIdx];
+ const p = F[impactIdx].P;
+ // Use ankles 27,28 if available, else hips
+ let ax = 0.5, ay = 0.85;
+ if(p[27] && p[28]){
+   ax = (p[27][0]+p[28][0])/2;
+   ay = Math.min(p[27][1], p[28][1]) + 0.02; // slightly above ground
+   if(m.ballPos!=null){
+     const stanceW = Math.abs(p[27][0]-p[28][0]) || 0.2;
+     ax += (m.ballPos-0.5)*stanceW*1.2;
+   }
+ } else if(p[23] && p[24]){
+   ax = (p[23][0]+p[24][0])/2;
+   ay = (p[23][1]+p[24][1])/2 + 0.15;
+ }
+ return {x:Math.max(0.05,Math.min(0.95,ax)), y:Math.max(0.1,Math.min(0.95,ay))};
+}
+
+async function runBallDetection(){
+ if(ballDetectionRunning) return;
+ if(!F.length || !phases.length) return;
+ const impactPhase = phases.find(ph=>ph.name==='impact');
+ if(!impactPhase) return;
+ ballImpactIdx = impactPhase.idx;
+ initBallCanvas();
+ BALLS = [];
+ ballPrevData = null;
+ ballLastPos = estimateBallStartPos(ballImpactIdx);
+ ballVelocity = {x:0.015, y:-0.04}; // initial guess – forward and up
+ ballDetectionRunning = true;
+ const colorMode = document.getElementById('ballColor')?.value || 'auto';
+ const sens = parseInt(document.getElementById('ballSens')?.value || '5',10);
+ const totalFrames = F.length - ballImpactIdx;
+ let detectedCount=0;
+
+ say(`Auto ball trace: scanning ${totalFrames} frames from impact...`);
+
+ for(let fi=ballImpactIdx; fi<F.length; fi++){
+   const t = F[fi].t;
+   try{
+     await seek(t);
+   }catch(e){ continue; }
+   // Draw video frame to ball canvas
+   try{
+     ballCtx.drawImage(v, 0,0, ballCanvas.width, ballCanvas.height);
+   }catch(e){ continue; }
+   const imageData = ballCtx.getImageData(0,0, ballCanvas.width, ballCanvas.height);
+
+   // ROI: predicted position +- search window that grows with speed
+   const predX = ballLastPos ? ballLastPos.x + ballVelocity.x : 0.5;
+   const predY = ballLastPos ? ballLastPos.y + ballVelocity.y : 0.8;
+   const searchW = Math.max(80, Math.min(320, 80 + Math.abs(ballVelocity.x)*800));
+   const searchH = Math.max(80, Math.min(240, 80 + Math.abs(ballVelocity.y)*800));
+   const roi = {
+     x: Math.max(0, Math.floor((predX*ballCanvas.width) - searchW/2)),
+     y: Math.max(0, Math.floor((predY*ballCanvas.height) - searchH/2)),
+     w: searchW,
+     h: searchH
+   };
+   // Clamp ROI
+   if(roi.x+roi.w>ballCanvas.width) roi.w = ballCanvas.width-roi.x;
+   if(roi.y+roi.h>ballCanvas.height) roi.h = ballCanvas.height-roi.y;
+   // For first few frames after impact, search larger area near ground
+   if(fi - ballImpactIdx < 5){
+     roi.x = Math.max(0, Math.floor(ballLastPos.x*ballCanvas.width - 160));
+     roi.w = 320;
+     roi.y = Math.max(0, Math.floor(ballLastPos.y*ballCanvas.height - 80));
+     roi.h = 200;
+   }
+
+   const blobs = findWhiteBlobs(imageData, ballCanvas.width, ballCanvas.height, roi, ballPrevData, colorMode, sens);
+
+   // Filter blobs near body pose to avoid white clothing
+   let best = null;
+   let bestScore = -Infinity;
+   const p = F[fi]?.P;
+   for(const b of blobs){
+     let nearBody = false;
+     if(p){
+       for(let k=11;k<=16;k++){ // shoulders, elbows, wrists
+         if(p[k] && Math.hypot(p[k][0]-b.x, p[k][1]-b.y)<0.08){ nearBody=true; break; }
+       }
+     }
+     if(nearBody) continue;
+     const dx = b.x - predX;
+     const dy = b.y - predY;
+     const dist = Math.hypot(dx,dy);
+     const score = b.brightest*2 - dist*500 - b.area*0.5;
+     if(score>bestScore){
+       bestScore=score;
+       best=b;
+     }
+   }
+
+   if(best && bestScore>-200){
+     const newPos = {x:best.x, y:best.y, t, frameIdx:fi, conf:best.brightest, area:best.area};
+     // Update velocity
+     if(ballLastPos){
+       ballVelocity.x = (newPos.x - ballLastPos.x)*0.7 + ballVelocity.x*0.3;
+       ballVelocity.y = (newPos.y - ballLastPos.y)*0.7 + ballVelocity.y*0.3;
+     }
+     BALLS.push(newPos);
+     ballLastPos = newPos;
+     detectedCount++;
+   } else {
+     // No detection – predict forward using velocity
+     if(ballLastPos){
+       const pred = {x:predX, y:predY, t, frameIdx:fi, conf:0, area:0, predicted:true};
+       // Only push predicted if we have at least 2 real detections and still in flight
+       if(BALLS.length>=2 && predY>0.05 && predY<0.95 && predX>0.05 && predX<0.95){
+         // slow down vertical velocity (gravity)
+         ballVelocity.y += 0.0015;
+         // air drag
+         ballVelocity.x *= 0.995;
+       }
+       // Don't push too many predicted to avoid false trail
+       if(BALLS.filter(b=>!b.predicted).length>=3 && BALLS.length<60){
+         // we keep predicted for drawing gap but mark predicted
+         BALLS.push(pred);
+         ballLastPos = pred;
+       }
+     }
+   }
+
+   ballPrevData = new Uint8ClampedArray(imageData.data); // copy for diff
+   // Update progress every 10 frames
+   if((fi-ballImpactIdx)%10===0){
+     say(`Ball trace: ${fi-ballImpactIdx}/${totalFrames} frames – found ${detectedCount} ball positions...`);
+     await new Promise(r=>setTimeout(r, 5));
+   }
+   // Stop if ball goes out of frame high and long
+   if(ballLastPos && ballLastPos.y<0.02 && BALLS.length>10) break;
+ }
+
+ ballDetectionRunning=false;
+ say(`Ball trace done – ${BALLS.filter(b=>!b.predicted).length} real detections, ${BALLS.length} total points. Trail drawn.`);
+ // Trigger repaint
+ paint();
+ // Update report with ball stats
+ try{ updateBallStats(); }catch(e){}
+}
+
+function updateBallStats(){
+ const outBall = document.getElementById('ballStats');
+ if(!outBall) return;
+ if(!BALLS.length){ outBall.textContent='No ball detected – try higher sensitivity or click to mark ball.'; return; }
+ const real = BALLS.filter(b=>!b.predicted);
+ if(real.length<2){ outBall.textContent=`Ball detected at ${real.length} frame(s) – low confidence.`; return; }
+ const start = real[0];
+ const apex = real.reduce((best,b)=> b.y<best.y?b:best, real[0]);
+ const end = real[real.length-1];
+ const dx = (end.x - start.x);
+ const dy = (start.y - end.y);
+ const flightTime = end.t - start.t;
+ const estCarry = Math.abs(dx)*300; // very rough – 0..1 normalized to yards
+ const apexHeight = (start.y - apex.y)*100; // rough
+ outBall.innerHTML = `Ball trace: <b>${real.length} detections</b> – Flight ${flightTime.toFixed(2)}s – Carry ~${estCarry.toFixed(0)}y (est) – Apex ${apexHeight.toFixed(0)}% – Launch ${(-Math.atan2(dy,dx)*180/Math.PI).toFixed(1)}°`;
+}
+
+function drawBallTrail(canvas, frameIdx){
+ if(!BALLS.length || !$('#balltrace')?.checked) return;
+ const ctx = canvas.getContext('2d');
+ const W = canvas.width, H = canvas.height;
+ const upto = frameIdx!=null ? BALLS.filter(b=>b.frameIdx<=frameIdx) : BALLS;
+ if(upto.length<2) return;
+
+ // Draw trail line
+ ctx.save();
+ ctx.lineWidth = Math.max(2, W/280);
+ ctx.lineCap='round';
+ ctx.lineJoin='round';
+
+ // Gradient trail fading
+ for(let i=1;i<upto.length;i++){
+   const a = upto[i-1], b = upto[i];
+   if(a.predicted && b.predicted) continue;
+   const alpha = i/upto.length;
+   const isReal = !b.predicted;
+   ctx.strokeStyle = isReal ? `rgba(255,255,255,${0.3+alpha*0.7})` : `rgba(255,200,0,${0.2+alpha*0.3})`;
+   ctx.beginPath();
+   ctx.moveTo(a.x*W, a.y*H);
+   ctx.lineTo(b.x*W, b.y*H);
+   ctx.stroke();
+   // small glow
+   if(isReal && i%3===0){
+     ctx.fillStyle = `rgba(255,255,255,${alpha*0.8})`;
+     ctx.beginPath();
+     ctx.arc(b.x*W, b.y*H, Math.max(2, W/320), 0, Math.PI*2);
+     ctx.fill();
+   }
+ }
+
+ // Draw current ball
+ const cur = upto[upto.length-1];
+ if(cur){
+   const isReal = !cur.predicted;
+   // outer glow
+   ctx.fillStyle = isReal ? 'rgba(255,255,255,0.9)' : 'rgba(255,220,0,0.6)';
+   ctx.strokeStyle = 'rgba(0,0,0,0.8)';
+   ctx.lineWidth = 2;
+   ctx.beginPath();
+   ctx.arc(cur.x*W, cur.y*H, isReal? Math.max(5, W/180) : Math.max(3, W/250), 0, Math.PI*2);
+   ctx.fill();
+   ctx.stroke();
+   // inner dot
+   ctx.fillStyle = isReal ? '#ffff00' : '#ffaa00';
+   ctx.beginPath();
+   ctx.arc(cur.x*W, cur.y*H, 2, 0, Math.PI*2);
+   ctx.fill();
+ }
+
+ ctx.restore();
+}
+
+// Hook into draw and paint
+(function(){
+ const origDraw = window.draw;
+ if(origDraw){
+   window.draw = function(canvas, i, hl){
+     origDraw(canvas,i,hl);
+     try{
+       drawBallTrail(canvas, i);
+     }catch(e){}
+   };
+ }
+})();
+
+// Manual ball marking – click on video to add ball position
+(function(){
+ const ov = document.getElementById('ov');
+ if(ov){
+   ov.addEventListener('click', e=>{
+     if(!$('#balltrace')?.checked) return;
+     if(!F.length) return;
+     const rect = ov.getBoundingClientRect();
+     const x = (e.clientX - rect.left)/rect.width;
+     const y = (e.clientY - rect.top)/rect.height;
+     const i = Math.round(v.currentTime*FPS);
+     if(i<0||i>=F.length) return;
+     const t = F[i]?.t || v.currentTime;
+     BALLS.push({x,y,t,frameIdx:i,conf:255,area:10,manual:true});
+     ballLastPos = {x,y};
+     paint();
+     updateBallStats();
+     say(`Manual ball mark added at ${x.toFixed(3)}, ${y.toFixed(3)} – frame ${i}`);
+   });
+ }
+})();
+
+// Add ball stats display and controls
+(function(){
+ const out = document.getElementById('out');
+ if(out && !document.getElementById('ballStats')){
+   const card = document.createElement('div');
+   card.className='card';
+   card.innerHTML = `<h3>Automatic Ball Tracing – NEW</h3>
+   <p class="note">Detects white/yellow golf ball after impact, draws trail. Click video to manually mark ball if auto misses. Works on this computer, video never leaves it.</p>
+   <div id="ballStats" class="note">No ball trace yet – analyze a swing, then click Run Ball Trace.</div>
+   <div class="row2">
+     <button class="ghost" id="runBallTrace">🏌️ Run Ball Trace</button>
+     <button class="ghost" id="clearBall2">Clear Ball</button>
+     <label class="sw"><input type="checkbox" id="showBallTrail" checked><i></i> Show trail</label>
+   </div>
+   <p class="note">Tips: Film with ball visible, bright background contrast, ball not same color as clothing. Increase sensitivity if ball missed, decrease if false detections. Manual click adds points.</p>`;
+   out.parentNode.insertBefore(card, out);
+   setTimeout(()=>{
+     const btnRun = document.getElementById('runBallTrace');
+     if(btnRun) btnRun.onclick = runBallDetection;
+     const btnClear = document.getElementById('clearBall2');
+     if(btnClear) btnClear.onclick = ()=>{ BALLS=[]; ballPrevData=null; ballLastPos=null; paint(); updateBallStats(); say('Ball trace cleared'); };
+     const cb = document.getElementById('clearBall');
+     if(cb) cb.onclick = ()=>{ BALLS=[]; ballPrevData=null; ballLastPos=null; paint(); updateBallStats(); };
+   },500);
+ }
+
+ // Auto-run ball detection after report if enabled
+ const origReportBall = window.report;
+ if(origReportBall){
+   window.report = function(){
+     origReportBall();
+     try{
+       const autoEnabled = document.getElementById('balltrace')?.checked;
+       if(autoEnabled && phases.length && !ballDetectionRunning && BALLS.length===0){
+         // Delay auto run slightly to let video settle
+         setTimeout(()=>{ if(document.getElementById('balltrace')?.checked) runBallDetection(); }, 800);
+       }
+       updateBallStats();
+     }catch(e){}
+   };
+ }
+})();
+
+// Export ball trace with skeleton video – include in existing export
+(function(){
+ const origDownloadSkeleton = window.downloadSkeletonVideo;
+ if(origDownloadSkeleton){
+   window.downloadSkeletonVideo = function(fmt){
+     // Ensure ball trail visible during export
+     const prev = document.getElementById('balltrace')?.checked;
+     if(document.getElementById('balltrace')) document.getElementById('balltrace').checked = true;
+     origDownloadSkeleton(fmt);
+     setTimeout(()=>{ if(document.getElementById('balltrace')) document.getElementById('balltrace').checked = prev; }, 1000);
+   };
+ }
+})();
+
+
+// ==================== SHARE OPTIMIZED FOR WHATSAPP / SOCIAL – GOLF COACH ====================
+let shareOptimizedBusy = false;
+
+async function createOptimizedBlobGolf(opts={}){
+ const v = document.getElementById('vid');
+ if(!v || !v.src){ alert('Load a video first'); return null; }
+ const maxW = opts.maxW||720;
+ const maxH = opts.maxH||1280;
+ const bitrate = opts.bitrate||2500000; // 2.5 Mbps for WhatsApp, 1.2 Mbps for extra small
+ const useAnnotated = opts.annotated!==false; // true = include skeleton/ghost/ball
+ const startT = opts.startT!=null ? opts.startT : 0;
+ const endT = opts.endT!=null ? opts.endT : (v.duration||10);
+
+ // Calculate target size keeping aspect
+ const vw = v.videoWidth||1280, vh = v.videoHeight||720;
+ let tw = vw, th = vh;
+ if(tw>maxW || th>maxH){
+   const r = Math.min(maxW/tw, maxH/th);
+   tw = Math.round(tw*r); th = Math.round(th*r);
+   tw -= tw%2; th -= th%2;
+ }
+ if(tw<2) tw=720; if(th<2) th=1280;
+
+ const outCanvas = document.createElement('canvas');
+ outCanvas.width = tw; outCanvas.height = th;
+ const ctx = outCanvas.getContext('2d');
+
+ // Prepare overlay canvases if annotated
+ let ovCanvas = null, skCanvas = null;
+ if(useAnnotated){
+   ovCanvas = document.getElementById('ov');
+   skCanvas = document.getElementById('sk');
+ }
+
+ // Build combined stream with audio
+ const canvasStream = outCanvas.captureStream(30);
+ let combined = canvasStream;
+ try{
+   if(v.captureStream){
+     const vs = v.captureStream();
+     vs.getAudioTracks().forEach(t=>{ try{ combined.addTrack(t); }catch(e){} });
+   } else if(v.mozCaptureStream){
+     const vs = v.mozCaptureStream();
+     vs.getAudioTracks().forEach(t=>{ try{ combined.addTrack(t); }catch(e){} });
+   }
+ }catch(e){}
+
+ let mime = 'video/mp4;codecs=avc1.42E01E';
+ if(!window.MediaRecorder || !MediaRecorder.isTypeSupported(mime)){
+   mime = 'video/mp4;codecs=avc1';
+   if(!MediaRecorder.isTypeSupported(mime)) mime = 'video/mp4;codecs=h264';
+   if(!MediaRecorder.isTypeSupported(mime)) mime = 'video/webm;codecs=vp9';
+   if(!MediaRecorder.isTypeSupported(mime)) mime = 'video/webm;codecs=vp8';
+ }
+
+ const chunks=[];
+ const rec = new MediaRecorder(combined, {mimeType:mime, videoBitsPerSecond: bitrate});
+ rec.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); };
+ const done = new Promise(r=>rec.onstop=r);
+
+ v.currentTime = startT;
+ await new Promise(ok=>{
+   const f=()=>{ v.removeEventListener('seeked',f); ok(); };
+   v.addEventListener('seeked', f);
+   setTimeout(ok, 2000);
+ });
+
+ // For annotated, need to draw skeleton each frame
+ let frameIdx=0;
+ if(useAnnotated && typeof F!=='undefined' && F.length){
+   frameIdx = Math.round(startT * (typeof FPS!=='undefined'?FPS:15));
+ }
+
+ rec.start(200);
+ v.play();
+
+ await new Promise(res=>{
+   const drawLoop = ()=>{
+     if(v.currentTime>=endT || v.ended){
+       res();
+       return;
+     }
+     // Draw video
+     ctx.drawImage(v, 0,0, tw, th);
+     // Draw overlay if annotated
+     if(useAnnotated){
+       try{
+         // If we have ov/sk canvases, draw their content scaled
+         if(ovCanvas){
+           // ov is overlay same size as video – we need to redraw skeleton via draw()
+           // Instead use temporary canvas for skeleton
+           const tmp = document.createElement('canvas');
+           tmp.width = v.videoWidth||tw; tmp.height = v.videoHeight||th;
+           // Call draw if available
+           if(typeof draw==='function' && typeof F!=='undefined' && F.length){
+             const idx = Math.min(F.length-1, Math.round(v.currentTime*(typeof FPS!=='undefined'?FPS:15)));
+             draw(tmp, idx, false);
+           }
+           ctx.drawImage(tmp, 0,0, tw, th);
+         }
+       }catch(e){}
+       // Brand bar
+       try{
+         const BH = Math.round(tw*0.075);
+         ctx.save();
+         ctx.fillStyle='#0f2e1a'; ctx.fillRect(0,0,tw,BH);
+         ctx.fillStyle='#1a7a3a'; ctx.fillRect(0,0,tw,3);
+         ctx.fillStyle='#fff'; ctx.font=`600 ${Math.round(BH*0.42)}px Inter`; ctx.textBaseline='middle';
+         ctx.fillText('Schmied R&D – Golf Coach', 12, BH/2+1);
+         ctx.restore();
+       }catch(e){}
+     }
+     requestAnimationFrame(drawLoop);
+   };
+   drawLoop();
+ });
+
+ rec.stop();
+ v.pause();
+ await done;
+
+ const blob = new Blob(chunks, {type: mime});
+ return {blob, mime, tw, th};
+}
+
+async function shareOptimizedWhatsAppGolf(annotated=true){
+ if(shareOptimizedBusy){ alert('Already exporting…'); return; }
+ shareOptimizedBusy=true;
+ const statusEl = document.getElementById('status');
+ const origSay = statusEl? statusEl.textContent : '';
+ try{
+   if(statusEl) statusEl.textContent='Optimizing video for WhatsApp / Social – 720p, 2.5 Mbps, this stays on your device…';
+   const v = document.getElementById('vid');
+   if(!v || !F || !F.length){ alert('Analyze a swing first'); return; }
+
+   // Auto trim to paddle? For golf, use full swing or impact to finish
+   let startT=0, endT=v.duration||10;
+   try{
+     if(typeof phases!=='undefined' && phases.length){
+       const addr = phases.find(p=>p.name==='address');
+       const fin = phases.find(p=>p.name==='finish');
+       if(addr) startT = Math.max(0, (F[addr.idx]?.t||0) - 0.5);
+       if(fin) endT = Math.min(v.duration, (F[fin.idx]?.t||v.duration) + 0.5);
+     }
+   }catch(e){}
+
+   const res = await createOptimizedBlobGolf({maxW:720, maxH:1280, bitrate: 1800000, annotated, startT, endT});
+   if(!res){ return; }
+   const {blob, mime} = res;
+   const ext = mime.includes('mp4')?'mp4':'webm';
+   const shot = (document.getElementById('shot')?.value||'swing');
+   const pro = (typeof snap==='function' ? (snap()?.pro?.toFixed(1)||'') : '');
+   const filename = `golf-${shot}-${annotated?'annotated':'original'}-${Date.now()}.${ext}`;
+   const text = `*Golf Coach – ${shot}*${pro?` – Pro ${pro}/10`:''}\n${annotated?'Annotated with ghost, tracer & ball trace –':'Original swing –'} 720p optimized for WhatsApp/Social\n_Schmied Research And Development_\nSeeking only peace and friendship…`;
+
+   const file = new File([blob], filename, {type: blob.type});
+   if(navigator.canShare && navigator.canShare({files:[file]})){
+     try{
+       await navigator.share({files:[file], title:'Golf swing – WhatsApp optimized', text});
+       if(statusEl) statusEl.textContent='Shared – optimized video sent via system share sheet';
+       return;
+     }catch(e){
+       if(e.name==='AbortError'){ if(statusEl) statusEl.textContent=origSay; return; }
+     }
+   }
+   // Fallback download + WhatsApp link
+   const url = URL.createObjectURL(blob);
+   const a=document.createElement('a'); a.href=url; a.download=filename; document.body.appendChild(a); a.click();
+   setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 6000);
+   if(statusEl) statusEl.textContent=`Optimized ${ (blob.size/1024/1024).toFixed(1)} MB video downloaded as ${ext.toUpperCase()} – attach to WhatsApp`;
+   setTimeout(()=>{
+     window.open('https://wa.me/?text='+encodeURIComponent(text), '_blank','noopener');
+   }, 800);
+ }catch(e){
+   alert('Optimized share failed: '+(e&&e.message||e));
+   console.error(e);
+ }finally{
+   shareOptimizedBusy=false;
+ }
+}
+
+// Add UI buttons
+(function(){
+ const addBtn = (id, label, title, onclick)=>{
+   if(document.getElementById(id)) return;
+   const bar = document.getElementById('helpbar') || document.getElementById('shareCard') || document.querySelector('.helpbar');
+   if(!bar) return;
+   const b=document.createElement('button'); b.id=id; b.className='ghost'; b.textContent=label; b.title=title; b.onclick=onclick;
+   bar.appendChild(b);
+ };
+ // Wait for DOM
+ setTimeout(()=>{
+   addBtn('btnShareWhatsAppGolf','📤 Share Optimized – WhatsApp','Share annotated 720p video optimized for WhatsApp / Instagram – stays on device','()=>shareOptimizedWhatsAppGolf(true)');
+   // Override to actual function reference
+   const b=document.getElementById('btnShareWhatsAppGolf');
+   if(b) b.onclick=()=>shareOptimizedWhatsAppGolf(true);
+
+   // Also add in shareCard
+   const shareCard = document.getElementById('shareCard');
+   if(shareCard && !document.getElementById('btnShareWhatsAppGolf2')){
+     const row = shareCard.querySelector('.row2') || shareCard;
+     const b2=document.createElement('button'); b2.id='btnShareWhatsAppGolf2'; b2.className='ghost'; b2.textContent='📤 WhatsApp Optimized (Annotated 720p)'; b2.title='Optimized 720p, low bitrate, with ghost + tracer + ball trace, for WhatsApp/Social';
+     b2.onclick=()=>shareOptimizedWhatsAppGolf(true);
+     row.appendChild(b2);
+
+     const b3=document.createElement('button'); b3.id='btnShareWhatsAppGolfOrig'; b3.className='ghost'; b3.textContent='📤 WhatsApp Optimized (Original 720p)'; b3.title='Optimized original video 720p for WhatsApp/Social';
+     b3.onclick=()=>shareOptimizedWhatsAppGolf(false);
+     row.appendChild(b3);
+   }
+ }, 800);
+})();
+
+</script></body></html>
